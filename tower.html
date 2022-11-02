@@ -1,5 +1,6 @@
 <meta charset="utf-8">
 <script src="jquery-3.6.1.slim.min.js"></script>
+<script src="luxon.min.js"></script>
 
 <style>
 @font-face {
@@ -42,9 +43,15 @@ section {
   transition: opacity 300ms;
   white-space: pre;
 }
+.widget {
+  white-space: normal;
+}
 .hidden {
   opacity: 0;
   transition: none;
+}
+.omitted {
+  display: none;
 }
 .panel {
   padding: 12px;
@@ -80,12 +87,26 @@ section {
 .strike {
   text-decoration: line-through;
 }
+#num-years, #num-days, #percent-part1 {
+  font-size: 220px;
+  height: 192px;
+}
+
+#label-days {
+  margin-bottom: 24px;
+}
+.time-part {
+  text-align: left;
+  padding-left: 84px;
+}
 </style>
 
 <body>
   <div id="controls">
     <button onclick='document.fullscreenElement ? document.exitFullscreen() : document.body.requestFullscreen()' type=button>Full screen</button>
     <button onclick='fi = 0; nextFrameMillis = Date.now()' type=button>Restart</button>
+    <button onclick='fi = (fi + frames.length - 2) % frames.length; nextFrameMillis = Date.now()' type=button>Previous</button>
+    <button onclick='nextFrameMillis = Date.now() + 3600*1000' type=button>Stay</button>
     <button onclick='nextFrameMillis = Date.now()' type=button>Next</button>
   </div>
   <section id=top>
@@ -101,9 +122,137 @@ section {
     <div id="bottom-right" class="panel bottom right">
     </div>
   </section>
+
+  <div id="widgets" class="omitted">
+    <div id="deadline-widget" class="widget">
+      <div id="num-years"></div>
+      <div id="label-years" class="lg">YEARS</div>
+      <div id="num-days">
+        <span id="days-100" class="digit"></span><span id="days-10" class="digit"></span><span id="days-1" class="digit"></span>
+      </div>
+      <div id="label-days" class="lg">DAYS</div>
+      <div id="hours" class="time-part">
+        <span id="hours-10" class="digit"></span><span id="hours-1" class="digit"></span> <span id="label-hours">HRS</span>
+      </div>
+      <div id="minutes" class="time-part">
+        <span id="minutes-10" class="digit"></span><span id="minutes-1" class="digit"></span> <span id="label-minutes">MIN</span>
+      </div>
+      <div id="seconds" class="time-part">
+        <span id="seconds-10" class="digit"></span><span id="seconds-1" class="digit"></span> <span id="label-seconds">SEC</span>
+      </div>
+    </div>
+
+    <div id="renewables-widget" class="widget">
+      <div id="percent-part1">
+        <span id="percent-10" class="digit"></span><span id="percent-1" class="digit"></span>.
+      </div>
+      <div id="percent-part2">
+        <span id="percent-01" class="digit"></span><span id="percent-001" class="digit"></span><span id="percent-0001" class="digit"></span><span id="percent-00001" class="digit"></span><span id="percent-000001" class="digit"></span>
+      </div>
+      <div id="percent-part3">
+        <span id="percent-0000001" class="digit"></span><span id="percent-00000001" class="digit"></span><span id="percent-000000001" class="digit"></span><span id="percent-0000000001" class="digit"></span>
+      </div>
+    </div>
+  </div>
 </body>
 
 <script>
+var DEADLINE = luxon.DateTime.fromISO('2029-07-22T16:00:00Z');
+
+var deadlineWidget = $('#deadline-widget');
+var deadlineNumYears = $('#num-years');
+var deadlineDays = [$('#days-1'), $('#days-10'), $('#days-100')];
+var deadlineLabelDays = $('#label-days');
+var deadlineHours = [$('#hours-1'), $('#hours-10')];
+var deadlineLabelHours = $('#label-hours');
+var deadlineMinutes = [$('#minutes-1'), $('#minutes-10')];
+var deadlineSeconds = [$('#seconds-1'), $('#seconds-10')];
+
+var renewablesWidget = $('#renewables-widget');
+var renewablesPercentWholePart = [$('#percent-1'), $('#percent-10')];
+var renewablesPercentFractionalPart = [
+  $('#percent-0000000001'),
+  $('#percent-000000001'),
+  $('#percent-00000001'),
+  $('#percent-0000001'),
+  $('#percent-000001'),
+  $('#percent-00001'),
+  $('#percent-0001'),
+  $('#percent-001'),
+  $('#percent-01'),
+];
+
+function setDigits(value, elements) {
+  for (var element of elements) {
+    element.text(value % 10);
+    value = Math.floor(value / 10);
+  }
+}
+
+function deadline(row) {
+  if (row.children().length == 0) {
+    row.append(deadlineWidget);
+  }
+  var now = luxon.DateTime.utc();
+  var nextAnniversary = DEADLINE.set({year: now.year});
+  if (nextAnniversary < now) {
+    nextAnniversary = DEADLINE.set({year: now.year + 1});
+  }
+  var years = DEADLINE.year - nextAnniversary.year;
+  var t = nextAnniversary.toMillis() - now.toMillis();
+  t = Math.floor(t / 1000);
+  var s = t % 60;
+  t = Math.floor(t / 60);
+  var m = t % 60;
+  t = Math.floor(t / 60);
+  var h = t % 24;
+  var d = Math.floor(t / 24);
+
+  deadlineNumYears.text(years);
+  setDigits(d, deadlineDays);
+  deadlineLabelDays = (d == 1) ? 'DAY' : 'DAYS';
+  setDigits(h, deadlineHours);
+  deadlineLabelHours = (d == 1) ? 'HR' : 'HRS';
+  setDigits(m, deadlineMinutes);
+  setDigits(s, deadlineSeconds);
+}
+
+function linearGrowth(spec) {
+  var elapsed = BigInt(Date.now() - spec.refMillis);
+  var value = spec.initial + spec.rate * elapsed / 1000n + spec.bias;
+  var strValue = '0'.repeat(spec.shift) + String(value);
+  var wholePart = strValue.substr(0, strValue.length - spec.shift);
+  var fractionalPart = strValue.substr(-spec.shift).substr(0, spec.decimals);
+  return wholePart.replace(/^0+/, '') + '.' + fractionalPart;
+}
+
+var RENEWABLES = {
+  refMillis: luxon.DateTime.fromISO('2020-01-01T00:00:00Z').toMillis(),
+
+  initial: 11400000000000000000000000n,
+  rate: 20428359571070087n,
+
+  decimals: 9,
+  shift: 24
+};
+RENEWABLES.bias = 5n * 10n**BigInt(RENEWABLES.shift - RENEWABLES.decimals - 1);
+
+function renewables(row) {
+  if (row.children().length == 0) {
+    row.append(renewablesWidget);
+  }
+  var value = linearGrowth(RENEWABLES);
+  var [whole, fractional] = value.split('.');
+  setDigits(whole - 0, renewablesPercentWholePart);
+  setDigits(fractional - 0, renewablesPercentFractionalPart);
+}
+
+function indigenousLand(row) {
+}
+
+function lossAndDamage(row) {
+}
+
 const frames = [
   {
     duration: 5,
@@ -127,7 +276,7 @@ const frames = [
   },
   {
     duration: 15,
-    left: {theme: 'red', rows: ['DEADLINE'], animation: 'deadline'},
+    left: {theme: 'red', rows: ['DEADLINE', deadline]},
     right: {theme: 'red', rows: ['OUR', 'WINDOW', 'OF', 'HOPE', ' ', 'LET\'S', '#ActInTime']}
   },
   {
@@ -157,22 +306,22 @@ const frames = [
   },
   {
     duration: 10,
-    left: {theme: 'blue', rows: ['LIFELINE'], animation: 'renewables'},
+    left: {theme: 'blue', rows: ['LIFELINE', renewables, '%', 'OF WORLD\'S', 'ENERGY', 'FROM', 'RENEWABLES']},
     right: {theme: 'blue', rows: ['WE MUST', 'ACHIEVE', '100%', 'RENEWABLES', 'BEFORE', '2030', 'TO STAY', 'BELOW', '1.5° C']}
   },
   {
     duration: 10,
-    left: {theme: 'blue', rows: ['LIFELINE'], animation: 'indigenous'},
+    left: {theme: 'blue', rows: ['LIFELINE', indigenousLand]},
     right: {theme: 'blue', rows: ['INDIGENOUS', 'LANDS IN', 'INDIGENOUS', 'HANDS', 'IS A KEY', 'CLIMATE', 'SOLUTION']}
   },
   {
     duration: 10,
-    left: {theme: 'blue', rows: ['LIFELINE'], animation: 'lossdamage'},
+    left: {theme: 'blue', rows: ['LIFELINE', lossAndDamage]},
     right: {theme: 'blue', rows: ['THE BIGGEST', 'POLLUTERS', 'MUST PAY', 'THOSE', 'MOST', 'IMPACTED']}
   },
   {
     duration: 10,
-    left: {theme: 'red', rows: ['DEADLINE'], animation: 'deadline'},
+    left: {theme: 'red', rows: ['DEADLINE', deadline]},
     right: {theme: 'red', rows: ['THIS IS', 'OUR', 'WINDOW', 'OF HOPE', ' ', 'LET\'S', '#ActInTime']}
   }
 ];
@@ -196,9 +345,15 @@ function tick() {
   var now = Date.now();
   if (now > nextFrameMillis) {
     fi = (fi + 1) % frames.length;
-    var durationMillis = frames[fi].duration * 2 * 1000;
-    nextFrameMillis = (nextFrameMillis || now) + durationMillis;
-    startFrameMillis = nextFrameMillis - durationMillis;
+    startFrameMillis = (nextFrameMillis > now - 1000) ? nextFrameMillis : now;
+    nextFrameMillis = startFrameMillis + frames[fi].duration * 2 * 1000;
+    for (var ri = 0; ri < panels.left.rows.length; ri++) {
+      panels.left.rows[ri].empty();
+    }
+    for (var ri = 0; ri < panels.right.rows.length; ri++) {
+      panels.right.rows[ri].empty();
+    }
+    console.log('frame:', frames[fi].left.rows, frames[fi].right.rows);
   }
   si = 1;
   drawPanel(panels.left, frames[fi].left, now - startFrameMillis);
@@ -214,13 +369,18 @@ function drawPanel(panel, frame, millis) {
   var revealed = millis / 500;
   for (var ri = 0; ri < panel.rows.length; ri++) {
     var content = frame.rows[ri] || '';
-    var strike = false;
-    if (content.startsWith('/')) {
-      content = content.substring(1);
-      strike = true;
+    if (typeof content == 'function') {
+      content(panel.rows[ri]);
+    } else {
+      var strike = false;
+      if (content.startsWith('/')) {
+        content = content.substring(1);
+        strike = true;
+      }
+      panel.rows[ri].empty();
+      panel.rows[ri].text(content);
+      panel.rows[ri].toggleClass('strike', strike);
     }
-    panel.rows[ri].text(content);
-    panel.rows[ri].toggleClass('strike', strike);
     panel.rows[ri].toggleClass('hidden', si >= revealed);
     if (frame.rows[ri]) si++;
   }
