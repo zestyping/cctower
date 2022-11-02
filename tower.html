@@ -10,13 +10,33 @@
   box-sizing: border-box;
 }
 body {
+  margin: 0;
+  padding: 0;
   background: #000;
   font-family: frontpage;
   font-size: 96px;
   line-height: 1;
 }
-section {
+#controls {
+  position: absolute;
+  right: 0;
+  text-align: right;
   display: flex;
+  flex-direction: column;
+}
+section {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  position: absolute;
+}
+#top {
+  left: 0;
+  top: 0;
+}
+#bottom {
+  left: 500;
+  top: 0;
 }
 .row {
   transition: opacity 300ms;
@@ -29,6 +49,16 @@ section {
 .panel {
   padding: 12px;
   text-align: center;
+}
+.panel.left {
+  background: #222;
+}
+.panel.right {
+  background: #333;
+}
+.top.panel {
+  width: 208px;
+  height: 832px;
 }
 .bottom.panel {
   width: 416px;
@@ -52,19 +82,26 @@ section {
 }
 </style>
 
-<section id=top>
-  <div id="top-left" class="top panel">
+<body>
+  <div id="controls">
+    <button onclick='document.fullscreenElement ? document.exitFullscreen() : document.body.requestFullscreen()' type=button>Full screen</button>
+    <button onclick='fi = 0; nextFrameMillis = Date.now()' type=button>Restart</button>
+    <button onclick='nextFrameMillis = Date.now()' type=button>Next</button>
   </div>
-  <div id="top-right" class="top panel">
-  </div>
-</section>
+  <section id=top>
+    <div id="top-left" class="panel top left">
+    </div>
+    <div id="top-right" class="panel top right">
+    </div>
+  </section>
 
-<section id=bottom>
-  <div id="bottom-left" class="bottom panel">
-  </div>
-  <div id="bottom-right" class="bottom panel">
-  </div>
-</section>
+  <section id=bottom>
+    <div id="bottom-left" class="panel bottom left">
+    </div>
+    <div id="bottom-right" class="panel bottom right">
+    </div>
+  </section>
+</body>
 
 <script>
 const frames = [
@@ -159,7 +196,7 @@ function tick() {
   var now = Date.now();
   if (now > nextFrameMillis) {
     fi = (fi + 1) % frames.length;
-    var durationMillis = frames[fi].duration * 1000;
+    var durationMillis = frames[fi].duration * 2 * 1000;
     nextFrameMillis = (nextFrameMillis || now) + durationMillis;
     startFrameMillis = nextFrameMillis - durationMillis;
   }
@@ -174,7 +211,7 @@ function drawPanel(panel, frame, millis) {
   while (panel.rows.length < frame.rows.length) {
     panel.rows.push($('<div>').addClass('row').appendTo(panel.node));
   }
-  var revealed = millis / 400;
+  var revealed = millis / 500;
   for (var ri = 0; ri < panel.rows.length; ri++) {
     var content = frame.rows[ri] || '';
     var strike = false;
