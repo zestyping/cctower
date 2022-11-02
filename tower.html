@@ -87,17 +87,23 @@ section {
 .strike {
   text-decoration: line-through;
 }
-#num-years, #num-days, #percent-part1 {
+#num-years, #num-days, #percent-part1, #indigenous-part1, #loss-part1 {
   font-size: 220px;
   height: 192px;
 }
-
 #label-days {
-  margin-bottom: 24px;
+  margin-bottom: 48px;
 }
 .time-part {
   text-align: left;
   padding-left: 84px;
+}
+#indigenous-part3 {
+  height: 96px;
+  margin: -18px 0 66px 0;
+}
+#loss-part3 {
+  margin-bottom: 48px;
 }
 </style>
 
@@ -153,6 +159,25 @@ section {
         <span id="percent-0000001" class="digit"></span><span id="percent-00000001" class="digit"></span><span id="percent-000000001" class="digit"></span><span id="percent-0000000001" class="digit"></span>
       </div>
     </div>
+
+    <div id="indigenous-land-widget" class="widget">
+      <div id="indigenous-part1">43.5</div>
+      <div id="indigenous-part2">MILLION</div>
+      <div id="indigenous-part3">KM<sup>2</sup></div>
+    </div>
+
+    <div id="loss-damage-widget" class="widget">
+      <div id="loss-part1">
+        $<span id="loss-10000000000000" class="digit"></span><span id="loss-1000000000000" class="digit"></span>,
+      </div>
+      <div id="loss-part2">
+        <span id="loss-100000000000" class="digit"></span><span id="loss-10000000000" class="digit"></span><span id="loss-1000000000" class="digit"></span>,<span id="loss-100000000" class="digit"></span><span id="loss-10000000" class="digit"></span><span id="loss-1000000" class="digit"></span>,
+      </div>
+      <div id="loss-part3">
+        <span id="loss-100000" class="digit"></span><span id="loss-10000" class="digit"></span><span id="loss-1000" class="digit"></span>,<span id="loss-100" class="digit"></span><span id="loss-10" class="digit"></span><span id="loss-1" class="digit"></span>
+      </div>
+    </div>
+
   </div>
 </body>
 
@@ -180,6 +205,26 @@ var renewablesPercentFractionalPart = [
   $('#percent-0001'),
   $('#percent-001'),
   $('#percent-01'),
+];
+
+var indigenousLandWidget = $('#indigenous-land-widget');
+
+var lossDamageWidget = $('#loss-damage-widget');
+var lossDamageDigits = [
+  $('#loss-1'),
+  $('#loss-10'),
+  $('#loss-100'),
+  $('#loss-1000'),
+  $('#loss-10000'),
+  $('#loss-100000'),
+  $('#loss-1000000'),
+  $('#loss-10000000'),
+  $('#loss-100000000'),
+  $('#loss-1000000000'),
+  $('#loss-10000000000'),
+  $('#loss-100000000000'),
+  $('#loss-1000000000000'),
+  $('#loss-10000000000000')
 ];
 
 function setDigits(value, elements) {
@@ -210,9 +255,10 @@ function deadline(row) {
 
   deadlineNumYears.text(years);
   setDigits(d, deadlineDays);
-  deadlineLabelDays = (d == 1) ? 'DAY' : 'DAYS';
+  deadlineLabelDays.text((d == 1) ? 'DAY' : 'DAYS');
   setDigits(h, deadlineHours);
-  deadlineLabelHours = (d == 1) ? 'HR' : 'HRS';
+  console.log('hours', h);
+  deadlineLabelHours.text((h == 1) ? 'HR' : 'HRS');
   setDigits(m, deadlineMinutes);
   setDigits(s, deadlineSeconds);
 }
@@ -248,9 +294,30 @@ function renewables(row) {
 }
 
 function indigenousLand(row) {
+  if (row.children().length == 0) {
+    row.append(indigenousLandWidget);
+  }
 }
 
+var LOSS_DAMAGE = {
+  refMillis: luxon.DateTime.fromISO('2020-01-01T00:00:00Z').toMillis(),
+
+  initial: 297540000000000000000000n,
+  rate: 471408520521309n,
+
+  decimals: 0,
+  shift: 10
+};
+LOSS_DAMAGE.bias = 5n * 10n**BigInt(LOSS_DAMAGE.shift - LOSS_DAMAGE.decimals - 1);
+
+
 function lossAndDamage(row) {
+  if (row.children().length == 0) {
+    row.append(lossDamageWidget);
+  }
+  var value = linearGrowth(LOSS_DAMAGE);
+  var [whole, fractional] = value.split('.');
+  setDigits(whole - 0, lossDamageDigits);
 }
 
 const frames = [
@@ -311,12 +378,12 @@ const frames = [
   },
   {
     duration: 10,
-    left: {theme: 'blue', rows: ['LIFELINE', indigenousLand]},
+    left: {theme: 'blue', rows: ['LIFELINE', indigenousLand, 'LAND', 'PROTECTED', 'BY', 'INDIGENOUS', 'PEOPLE']},
     right: {theme: 'blue', rows: ['INDIGENOUS', 'LANDS IN', 'INDIGENOUS', 'HANDS', 'IS A KEY', 'CLIMATE', 'SOLUTION']}
   },
   {
     duration: 10,
-    left: {theme: 'blue', rows: ['LIFELINE', lossAndDamage]},
+    left: {theme: 'blue', rows: ['LIFELINE', lossAndDamage, 'LOSS &', 'DAMAGE', 'OWED', 'BY G20']},
     right: {theme: 'blue', rows: ['THE BIGGEST', 'POLLUTERS', 'MUST PAY', 'THOSE', 'MOST', 'IMPACTED']}
   },
   {
