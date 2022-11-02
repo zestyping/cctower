@@ -363,6 +363,20 @@ function lossAndDamage(row) {
 
 const frames = [
   {
+    duration: 60,
+    left: {theme: 'red', rows: ['OPENING']},
+    right: {theme: 'blue', rows: ['OPENING']},
+    video: {}
+  },
+
+  {
+    duration: 60,
+    left: {theme: '', rows: []},
+    right: {theme: '', rows: []},
+    video: {upper: stripesUpperVideo, lower: stripesLowerVideo}
+  },
+
+  {
     duration: 10,
     left: {theme: 'red-sm', rows: ['#ClimateClock']},
     right: {theme: 'blue-sm', rows: ['#ActInTime']},
@@ -520,13 +534,6 @@ const frames = [
     left: {theme: 'red', rows: ['DEADLINE', deadline]},
     right: {theme: 'red', rows: ['THIS IS', 'OUR', 'WINDOW', 'OF HOPE', ' ', 'LET\'S', '#ActInTime']}
   },
-
-  {
-    duration: 60,
-    left: {theme: '', rows: []},
-    right: {theme: '', rows: []},
-    video: {upper: stripesUpperVideo, lower: stripesLowerVideo}
-  }
 ];
 
 var fi = -1;
@@ -564,10 +571,12 @@ function tick() {
       $('#lower .video').empty();
       if (frame.video.upper) {
         $('#upper .video').append(frame.video.upper);
+        frame.video.upper.get(0).currentTime = 0;
         frame.video.upper.get(0).play();
       }
       if (frame.video.lower) {
         $('#lower .video').append(frame.video.lower);
+        frame.video.lower.get(0).currentTime = 0;
         frame.video.lower.get(0).play();
       }
     }
