@@ -1,0 +1,194 @@
+<meta charset="utf-8">
+<script src="jquery-3.6.1.slim.min.js"></script>
+
+<style>
+@font-face {
+  font-family: frontpage;
+  src: url('frontpageneue.otf') format('opentype');
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  background: #000;
+  font-family: frontpage;
+  font-size: 96px;
+  line-height: 1;
+}
+section {
+  display: flex;
+}
+.row {
+  transition: opacity 300ms;
+  white-space: pre;
+}
+.hidden {
+  opacity: 0;
+  transition: none;
+}
+.panel {
+  padding: 12px;
+  text-align: center;
+}
+.bottom.panel {
+  width: 416px;
+  height: 1040px;
+  overflow: hidden;
+  color: white;
+}
+.digit {
+  display: inline-block;
+  width: 1ch;
+  text-align: center;
+}
+.panel[theme='red'] {
+  background: #eb1c23;
+}
+.panel[theme='blue'] {
+  background: #4aa1cc;
+}
+.strike {
+  text-decoration: line-through;
+}
+</style>
+
+<section id=top>
+  <div id="top-left" class="top panel">
+  </div>
+  <div id="top-right" class="top panel">
+  </div>
+</section>
+
+<section id=bottom>
+  <div id="bottom-left" class="bottom panel">
+  </div>
+  <div id="bottom-right" class="bottom panel">
+  </div>
+</section>
+
+<script>
+const frames = [
+  {
+    duration: 5,
+    left: {theme: 'red', rows: ['#ClimateClock']},
+    right: {theme: 'blue', rows: ['#ActInTime']}
+  },
+  {
+    duration: 5,
+    left: {theme: 'red', rows: ['THE', 'SCIENCE', 'IS', 'CLEAR']},
+    right: {theme: 'blue', rows: ['OUR', 'CARBON', 'BUDGET', 'IS', 'RUNNING', 'OUT']}
+  },
+  {
+    duration: 5,
+    left: {theme: 'red', rows: ['WE', 'HAVE', 'LESS', 'THAN', '7', 'YEARS']},
+    right: {theme: 'blue', rows: ['TO', 'PROTECT', 'OUR PLANET', '& PEOPLE']}
+  },
+  {
+    duration: 5,
+    left: {theme: 'red', rows: ['DELAY', '=', 'DENIAL']},
+    right: {theme: 'blue', rows: ['WE MUST', 'END', 'FOSSIL', 'FUELS', 'BY', '/2070', '/2060', '/2050', '/2040', '2030']}
+  },
+  {
+    duration: 15,
+    left: {theme: 'red', rows: ['DEADLINE'], animation: 'deadline'},
+    right: {theme: 'red', rows: ['OUR', 'WINDOW', 'OF', 'HOPE', ' ', 'LET\'S', '#ActInTime']}
+  },
+  {
+    duration: 5,
+    left: {theme: 'red', rows: ['THE', 'EARTH', 'HAS A', 'DEADLINE']},
+    right: {theme: 'blue', rows: ['BUT', 'WE HAVE', 'MANY', 'LIFELINES']}
+  },
+  {
+    duration: 5,
+    left: {theme: 'red', rows: ['SOLUTIONS', 'EXIST']},
+    right: {theme: 'blue', rows: ['WE CAN', 'BUILD A', 'JUST &', 'LIVABLE', 'WORLD']}
+  },
+  {
+    duration: 5,
+    left: {theme: 'red', rows: ['PRESIDENTS,', 'MINISTERS,', 'NEGOTIATORS,', 'DELEGATES...', 'BE BOLD!']},
+    right: {theme: 'blue', rows: ['THE', 'FUTURE', 'IS COUNTING', 'ON YOU...']}
+  },
+  {
+    duration: 5,
+    left: {theme: 'red', rows: ['THE EYES', 'OF THE', 'WORLD', 'ARE ON', 'COP27']},
+    right: {theme: 'blue', rows: ['/BLAH', '/BLAH', '/BLAH', 'COURAGE', 'JUSTICE', 'SPEED']}
+  },
+  {
+    duration: 5,
+    left: {theme: 'red', rows: ['#ClimateClock']},
+    right: {theme: 'blue', rows: ['#ActInTime']}
+  },
+  {
+    duration: 10,
+    left: {theme: 'blue', rows: ['LIFELINE'], animation: 'renewables'},
+    right: {theme: 'blue', rows: ['WE MUST', 'ACHIEVE', '100%', 'RENEWABLES', 'BEFORE', '2030', 'TO STAY', 'BELOW', '1.5° C']}
+  },
+  {
+    duration: 10,
+    left: {theme: 'blue', rows: ['LIFELINE'], animation: 'indigenous'},
+    right: {theme: 'blue', rows: ['INDIGENOUS', 'LANDS IN', 'INDIGENOUS', 'HANDS', 'IS A KEY', 'CLIMATE', 'SOLUTION']}
+  },
+  {
+    duration: 10,
+    left: {theme: 'blue', rows: ['LIFELINE'], animation: 'lossdamage'},
+    right: {theme: 'blue', rows: ['THE BIGGEST', 'POLLUTERS', 'MUST PAY', 'THOSE', 'MOST', 'IMPACTED']}
+  },
+  {
+    duration: 10,
+    left: {theme: 'red', rows: ['DEADLINE'], animation: 'deadline'},
+    right: {theme: 'red', rows: ['THIS IS', 'OUR', 'WINDOW', 'OF HOPE', ' ', 'LET\'S', '#ActInTime']}
+  }
+];
+
+var fi = -1;
+var startFrameMillis = 0;
+var nextFrameMillis = 0;
+var si = 0;
+var panels = {
+  left: {
+    node: $('#bottom-left'),
+    rows: [],
+  },
+  right: {
+    node: $('#bottom-right'),
+    rows: [],
+  }
+};
+
+function tick() {
+  var now = Date.now();
+  if (now > nextFrameMillis) {
+    fi = (fi + 1) % frames.length;
+    var durationMillis = frames[fi].duration * 1000;
+    nextFrameMillis = (nextFrameMillis || now) + durationMillis;
+    startFrameMillis = nextFrameMillis - durationMillis;
+  }
+  si = 1;
+  drawPanel(panels.left, frames[fi].left, now - startFrameMillis);
+  si += 2;
+  drawPanel(panels.right, frames[fi].right, now - startFrameMillis);
+  setTimeout(tick, 20);
+}
+
+function drawPanel(panel, frame, millis) {
+  while (panel.rows.length < frame.rows.length) {
+    panel.rows.push($('<div>').addClass('row').appendTo(panel.node));
+  }
+  var revealed = millis / 400;
+  for (var ri = 0; ri < panel.rows.length; ri++) {
+    var content = frame.rows[ri] || '';
+    var strike = false;
+    if (content.startsWith('/')) {
+      content = content.substring(1);
+      strike = true;
+    }
+    panel.rows[ri].text(content);
+    panel.rows[ri].toggleClass('strike', strike);
+    panel.rows[ri].toggleClass('hidden', si >= revealed);
+    if (frame.rows[ri]) si++;
+  }
+  panel.node.attr('theme', frame.theme);
+}
+
+tick();
+</script>
