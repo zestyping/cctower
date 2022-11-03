@@ -7,7 +7,7 @@
   <div id="controls">
     <button onclick="document.fullscreenElement ? document.exitFullscreen() : document.body.requestFullscreen()" type=button>Full screen</button>
     <div class="spacer"></div>
-    <button onclick="si = -1; nextFrameMillis = Date.now()" type=button>Restart</button>
+    <button onclick="si = slides.length - 1; nextFrameMillis = Date.now()" type=button>Restart</button>
     <button onclick="si = (si + slides.length - 2) % slides.length; nextFrameMillis = Date.now()" type=button>Previous</button>
     <button onclick="nextFrameMillis = Date.now() + 3600*1000" type=button>Hold</button>
     <button onclick="nextFrameMillis = Date.now()" type=button>Next</button>
