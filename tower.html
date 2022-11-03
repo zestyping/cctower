@@ -158,6 +158,22 @@ section {
   color: #4aa1cc;
   background: #fff;
 }
+.struck {
+  display: inline-block;
+  position: relative;
+}
+.striker {
+  position: absolute;
+  left: -10%;
+  right: -10%;
+  top: 43%;
+  bottom: 43%;
+  background: #eb1c23;
+  transition: right 0.3s ease-in 0.4s;
+}
+.hidden .striker {
+  right: 110%;
+}
 </style>
 
 <body>
@@ -422,6 +438,25 @@ function inverted(text) {
   };
 }
 
+function pause(row) {
+  row.addClass('omitted');
+}
+
+function strike(text) {
+  return (row) => {
+    if (row.children().length == 0) {
+      var span = $('<span>');
+      span.addClass('struck');
+      span.text(text);
+      var striker = $('<div>');
+      striker.addClass('striker');
+
+      row.append(span);
+      span.append(striker);
+    }
+  };
+}
+
 const frames = [
   {
     duration: 60,
@@ -456,7 +491,7 @@ const frames = [
   {
     duration: 10,
     left: {theme: 'red', rows: ['DELAY', '=', 'DENIAL']},
-    right: {theme: 'blue', rows: ['WE MUST', 'END', 'FOSSIL', 'FUELS', 'BY', '/2070', '/2050', '/2040', double('2030')]}
+    right: {theme: 'blue', rows: ['WE MUST', 'END', 'FOSSIL', 'FUELS', 'BY', strike('2070'), pause, strike('2050'), pause, strike('2040'), pause, double('2030')]}
   },
   {
     duration: 10,
@@ -482,7 +517,7 @@ const frames = [
   {
     duration: 10,
     left: {theme: 'red', rows: ['THE EYES', 'OF THE', 'WORLD', 'ARE ON', 'COP27']},
-    right: {theme: 'blue', rows: ['/BLAH', '/BLAH', '/BLAH', 'COURAGE', 'JUSTICE', 'SPEED']}
+    right: {theme: 'blue', rows: [strike('BLAH'), strike('BLAH'), strike('BLAH'), ' ', pause, 'COURAGE', pause, 'JUSTICE', pause, 'SPEED']}
   },
   {
     duration: 10,
@@ -659,15 +694,9 @@ function drawPanel(panel, frame, millis) {
     if (typeof content == 'function') {
       content(panel.rows[ri]);
     } else {
-      var strike = false;
-      if (content.startsWith('/')) {
-        content = content.substring(1);
-        strike = true;
-      }
       panel.rows[ri].empty();
       panel.rows[ri].removeClass().addClass('row');
       panel.rows[ri].text(content);
-      panel.rows[ri].toggleClass('strike', strike);
     }
     panel.rows[ri].toggleClass('hidden', si >= revealed);
     if (frame.rows[ri]) si++;
