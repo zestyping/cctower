@@ -53,7 +53,7 @@ var slides = [
   {
     hold: 10,
     left: {theme: 'red', beats: ['THE EYES', 'OF THE', 'WORLD', 'ARE ON', 'COP27', pause]},
-    right: {theme: 'blue', beats: ['NO MORE', strike('BLAH'), strike('BLAH'), strike('BLAH'), '', 'TIME FOR', pause, inverted('COURAGE'), pause, inverted('JUSTICE'), pause, inverted('SPEED')]}
+    right: {theme: 'blue', beats: ['NO MORE', strike('BLAH'), strike('BLAH'), strike('BLAH'), '', 'TIME FOR', pause, inverted('COURAGE'), pause, pause, inverted('JUSTICE'), pause, pause, inverted('SPEED')]}
   },
   {
     duration: 10,
