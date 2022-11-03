@@ -13,12 +13,50 @@ var panels = {
   }
 };
 
+function toggleFullscreen() {
+  if (document.fullscreenElement) {
+    document.exitFullscreen();
+  } else {
+    document.body.requestFullscreen();
+  }
+}
+
+function restart() {
+  si = slides.length - 1;
+  nextFrameMillis = Date.now();
+}
+
+function previousSlide() {
+  si = (si + slides.length - 2) % slides.length;
+  nextFrameMillis = Date.now();
+}
+
+function holdCurrentSlide() {
+  nextFrameMillis = Date.now() + 3600*1000;
+}
+
+function nextSlide() {
+  nextFrameMillis = Date.now();
+}
+
 function formatBeats(beats) {
   var parts = [];
   for (var beat of beats) {
-    parts.push(typeof beat == 'string' ? beat : '<fn>');
+    parts.push(typeof beat == 'function' ? beat.repr : beat);
   }
   return parts.join(',');
+}
+
+function getDuration(slide) {
+  return (slide.duration * 1000) || (
+    (1 + slide.left.beats.length + 1 + slide.right.beats.length) * 500 +
+    (slide.hold || DEFAULT_HOLD) * 1000
+  );
+}
+
+var totalDuration = 0;
+for (var slide of slides) {
+  totalDuration += getDuration(slide);
 }
 
 function tick() {
@@ -27,10 +65,7 @@ function tick() {
   if (now > nextFrameMillis) {
     si = (si + 1) % slides.length;
     slide = slides[si];
-    duration = (slide.duration * 1000) || (
-        (1 + slide.left.beats.length + 1 + slide.right.beats.length) * 500 +
-        (slide.hold || DEFAULT_HOLD) * 1000
-    );
+    duration = getDuration(slide);
     startFrameMillis = (nextFrameMillis > now - 1000) ? nextFrameMillis : now;
     nextFrameMillis = startFrameMillis + duration;
 
@@ -45,9 +80,9 @@ function tick() {
       panels.right.rows[ri].removeClass().addClass('row');
     }
 
-    status = 'Slide ' + si + ' (' + duration/1000 + ' s): ';
+    status = 'Slide ' + (si + 1) + ' of ' + slides.length + ' (' + duration/1000 + ' s of ' + totalDuration/1000 + ' s): ';
     console.log(status, slide.left.beats, slide.right.beats);
-    $('#status').text(status + '[' + formatBeats(slide.left.beats) + '] [' + formatBeats(slide.right.beats) + ']');
+    $('#status').text(status + '\n    ' + formatBeats(slide.left.beats) + '\n    ' + formatBeats(slide.right.beats));
 
     if (slide.video) {
       $('#upper .video').empty();

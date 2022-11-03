@@ -30,7 +30,7 @@ var slides = [
     right: {theme: 'blue', beats: ['TO', 'PROTECT', 'OUR PLANET', '& PEOPLE']}
   },
   {
-    left: {theme: 'red', beats: [larger('DELAY'), larger('='), larger('DENIAL'), pause]},
+    left: {theme: 'red', beats: [delayDenial, pause]},
     right: {theme: 'blue', beats: ['WE MUST', 'END', 'FOSSIL', 'FUELS', 'BY', strike('2070'), pause, strike('2050'), pause, strike('2040'), pause, double('2030')]}
   },
   {

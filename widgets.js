@@ -46,6 +46,7 @@ var lossDamageFractionalPart = [
   $('#loss-01'),
 ];
 
+var delayDenialWidget = $('#delay-denial-widget');
 var hundredPercentWidget = $('#hundred-percent-widget');
 
 function setDigits(value, elements) {
@@ -84,6 +85,7 @@ function deadline(row) {
   setDigits(m, deadlineMinutes);
   setDigits(s, deadlineSeconds);
 }
+deadline.repr = '<deadline>';
 
 function linearGrowth(spec) {
   var elapsed = BigInt(Date.now() - spec.refMillis);
@@ -114,12 +116,14 @@ function renewables(row) {
   setDigits(whole - 0, renewablesWholePart);
   setDigits(fractional - 0, renewablesFractionalPart);
 }
+renewables.repr = '<renewables>';
 
 function indigenousLand(row) {
   if (row.children().length == 0) {
     row.append(indigenousLandWidget);
   }
 }
+indigenousLand.repr = '<indigenousLand>';
 
 var LOSS_DAMAGE = {
   refMillis: luxon.DateTime.fromISO('2020-01-01T00:00:00Z').toMillis(),
@@ -141,61 +145,74 @@ function lossDamage(row) {
   setDigits(whole - 0, lossDamageWholePart);
   setDigits(fractional - 0, lossDamageFractionalPart);
 }
+lossDamage.repr = '<lossDamage>';
+
+function delayDenial(row) {
+  if (row.children().length == 0) {
+    row.append(delayDenialWidget);
+  }
+}
+delayDenial.repr = '<delayDenial>';
 
 function hundredPercent(row) {
   if (row.children().length == 0) {
     row.append(hundredPercentWidget);
   }
 }
+hundredPercent.repr = '<hundredPercent>';
 
 function small(text) {
-  return (row) => {
+  var smallText = (row) => {
     row.text(text);
     row.addClass('small');
   };
+  smallText.repr = text;
+  return smallText;
 }
 
 function large(text) {
-  return (row) => {
+  var largeText = (row) => {
     row.text(text);
     row.addClass('large');
   };
-}
-
-function larger(text) {
-  return (row) => {
-    row.text(text);
-    row.addClass('larger');
-  };
+  largeText.repr = text;
+  return largeText;
 }
 
 function double(text) {
-  return (row) => {
+  var doubleText = (row) => {
     row.text(text);
     row.addClass('double');
   };
+  doubleText.repr = text;
+  return doubleText;
 }
 
 function spaceAfter(text) {
-  return (row) => {
+  var spaceAfterText = (row) => {
     row.text(text);
     row.addClass('space-after');
   };
+  spaceAfterText.repr = text;
+  return spaceAfterText;
 }
 
 function inverse(text) {
-  return (row) => {
+  var inverseText = (row) => {
     row.text(text);
     row.addClass('inverse');
   };
+  inverseText.repr = text;
+  return inverseText;
 }
 
 function pause(row) {
   row.addClass('omitted');
 }
+pause.repr = '<pause>';
 
 function strike(text) {
-  return (row) => {
+  var strikeText = (row) => {
     if (row.children().length == 0) {
       var span = $('<span>');
       span.addClass('struck');
@@ -207,4 +224,6 @@ function strike(text) {
       span.append(striker);
     }
   };
+  strikeText.repr = text;
+  return strikeText;
 }

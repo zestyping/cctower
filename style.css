@@ -81,7 +81,7 @@ section.level {
   left: 0;
   width: 100%;
   top: 1080px;
-  height: 64px;
+  height: 128px;
   background: #000;
   color: #0f0;
   font-family: monospace;
@@ -90,7 +90,7 @@ section.level {
   padding: 12px;
   border: 1px solid #333;
   line-height: 1;
-  white-space: nowrap;
+  white-space: pre;
   overflow: hidden;
 }
 .row {
@@ -108,7 +108,7 @@ section.level {
   display: none;
 }
 .panel {
-  padding: 12px 0 0 0;
+  padding: 12px;
   text-align: center;
   z-index: 2;
 }
@@ -182,11 +182,6 @@ section.level {
   line-height: 144px;
   height: 132px;
 }
-.larger {  /* 7/4 size */
-  font-size: 174px;
-  line-height: 172px;
-  height: 154px;
-}
 .double {  /* 2x size */
   font-size: 200px;
   line-height: 200px;
@@ -230,4 +225,9 @@ section.level {
 }
 .hidden .striker {
   right: 110%;
+}
+#delay-denial-widget .row {
+  font-size: 180px;
+  line-height: 146px;
+  height: 154px;
 }

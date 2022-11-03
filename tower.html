@@ -6,13 +6,13 @@
 <body>
   <div id="controls">
     <section>
-      <button onclick="document.fullscreenElement ? document.exitFullscreen() : document.body.requestFullscreen()" type=button>Full screen</button>
-      <button onclick="si = slides.length - 1; nextFrameMillis = Date.now()" type=button>Restart</button>
+      <button onclick="toggleFullscreen()" type=button>Full screen</button>
+      <button onclick="restart()" type=button>Restart</button>
     </section>
     <section>
-      <button onclick="si = (si + slides.length - 2) % slides.length; nextFrameMillis = Date.now()" type=button>Previous</button>
-      <button onclick="nextFrameMillis = Date.now() + 3600*1000" type=button>Hold</button>
-      <button onclick="nextFrameMillis = Date.now()" type=button>Next</button>
+      <button onclick="previousSlide()" type=button>Previous</button>
+      <button onclick="holdCurrentSlide()" type=button>Hold</button>
+      <button onclick="nextSlide()" type=button>Next</button>
     </section>
   </div>
   <button id="bottom10" onclick="$('.shade').toggleClass('omitted')" type=button>10<br>%</button>
@@ -100,6 +100,12 @@
         <span id="loss-00000001" class="digit"></span><span id="loss-000000001" class="digit"></span><span id="loss-0000000001" class="digit"></span> <span id="loss-00000000001" class="digit"></span><span id="loss-000000000001" class="digit"></span><span id="loss-0000000000001" class="digit"></span>
       </div>
       <div id="loss-part4">TRILLION</div>
+    </div>
+
+    <div id="delay-denial-widget" class="widget">
+      <div class="row">DELAY</div>
+      <div class="row">=</div>
+      <div class="row">DENIAL</div>
     </div>
 
     <div id="hundred-percent-widget" class="widget">
