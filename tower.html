@@ -57,7 +57,7 @@ section {
   top: 832px;
 }
 .row {
-  transition: opacity 300ms;
+  transition: opacity 250ms ease-out;
   white-space: pre;
 }
 .widget {
@@ -151,12 +151,20 @@ section {
   padding-bottom: 48px;
 }
 [theme='red'] .inverted {
+  transition: opacity 750ms;
   color: #eb1c23;
   background: #fff;
 }
 [theme='blue'] .inverted {
+  transition: opacity 750ms;
   color: #4aa1cc;
   background: #fff;
+}
+[theme='red'] .inverted.hidden {
+  transition: none;
+}
+[theme='blue'] .inverted.hidden {
+  transition: none;
 }
 .struck {
   display: inline-block;
@@ -169,7 +177,7 @@ section {
   top: 43%;
   bottom: 43%;
   background: #eb1c23;
-  transition: right 0.3s ease-in 0.4s;
+  transition: right 300ms ease-in 400ms;
 }
 .hidden .striker {
   right: 110%;
@@ -496,7 +504,7 @@ const frames = [
   {
     duration: 10,
     left: {theme: 'red', rows: [inverted('DEADLINE'), deadline]},
-    right: {theme: 'red', rows: ['OUR', 'WINDOW', 'OF', 'HOPE', ' ', 'LET\'S', '#ActInTime']}
+    right: {theme: 'red', rows: ['OUR', 'WINDOW', 'OF', double('HOPE'), ' ', 'LET\'S', '#ActInTime']}
   },
 
   {
@@ -517,7 +525,7 @@ const frames = [
   {
     duration: 10,
     left: {theme: 'red', rows: ['THE EYES', 'OF THE', 'WORLD', 'ARE ON', 'COP27']},
-    right: {theme: 'blue', rows: [strike('BLAH'), strike('BLAH'), strike('BLAH'), ' ', pause, 'COURAGE', pause, 'JUSTICE', pause, 'SPEED']}
+    right: {theme: 'blue', rows: ['NO MORE', strike('BLAH'), strike('BLAH'), strike('BLAH'), ' ', 'TIME FOR', pause, inverted('COURAGE'), pause, inverted('JUSTICE'), pause, inverted('SPEED')]}
   },
   {
     duration: 10,
@@ -544,7 +552,7 @@ const frames = [
   {
     duration: 10,
     left: {theme: 'red', rows: [inverted('DEADLINE'), deadline]},
-    right: {theme: 'red', rows: ['THIS IS', 'OUR', 'WINDOW', 'OF HOPE', ' ', 'LET\'S', '#ActInTime']}
+    right: {theme: 'red', rows: ['OUR', 'WINDOW', 'OF', double('HOPE'), ' ', 'LET\'S', '#ActInTime']}
   },
 
   {
@@ -565,7 +573,7 @@ const frames = [
   {
     duration: 10,
     left: {theme: 'red', rows: ['DEADLINE', deadline]},
-    right: {theme: 'red', rows: ['THIS IS', 'OUR', 'WINDOW', 'OF HOPE', ' ', 'LET\'S', '#ActInTime']}
+    right: {theme: 'red', rows: ['OUR', 'WINDOW', 'OF', double('HOPE'), ' ', 'LET\'S', '#ActInTime']}
   },
 
   {
@@ -586,7 +594,7 @@ const frames = [
   {
     duration: 10,
     left: {theme: 'red', rows: ['DEADLINE', deadline]},
-    right: {theme: 'red', rows: ['THIS IS', 'OUR', 'WINDOW', 'OF HOPE', ' ', 'LET\'S', '#ActInTime']}
+    right: {theme: 'red', rows: ['OUR', 'WINDOW', 'OF', double('HOPE'), ' ', 'LET\'S', '#ActInTime']}
   },
 
   {
@@ -607,7 +615,7 @@ const frames = [
   {
     duration: 10,
     left: {theme: 'red', rows: ['DEADLINE', deadline]},
-    right: {theme: 'red', rows: ['THIS IS', 'OUR', 'WINDOW', 'OF HOPE', ' ', 'LET\'S', '#ActInTime']}
+    right: {theme: 'red', rows: ['OUR', 'WINDOW', 'OF', double('HOPE'), ' ', 'LET\'S', '#ActInTime']}
   },
 
   {
@@ -628,7 +636,7 @@ const frames = [
   {
     duration: 10,
     left: {theme: 'red', rows: ['DEADLINE', deadline]},
-    right: {theme: 'red', rows: ['THIS IS', 'OUR', 'WINDOW', 'OF HOPE', ' ', 'LET\'S', '#ActInTime']}
+    right: {theme: 'red', rows: ['OUR', 'WINDOW', 'OF', double('HOPE'), ' ', 'LET\'S', '#ActInTime']}
   },
 ];
 
