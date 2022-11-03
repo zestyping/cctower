@@ -257,14 +257,14 @@ section {
     </div>
 
     <div id="renewables-widget" class="widget space-after">
-      <div id="percent-part1" class="double">
-        <span id="percent-10" class="digit"></span><span id="percent-1" class="digit"></span>.
+      <div id="renewables-part1" class="double">
+        <span id="renewables-10" class="digit"></span><span id="renewables-1" class="digit"></span>.
       </div>
-      <div id="percent-part2">
-        <span id="percent-01" class="digit"></span><span id="percent-001" class="digit"></span><span id="percent-0001" class="digit"></span><span id="percent-00001" class="digit"></span><span id="percent-000001" class="digit"></span>
+      <div id="renewables-part2">
+        <span id="renewables-01" class="digit"></span><span id="renewables-001" class="digit"></span><span id="renewables-0001" class="digit"></span><span id="renewables-00001" class="digit"></span><span id="renewables-000001" class="digit"></span>
       </div>
-      <div id="percent-part3">
-        <span id="percent-0000001" class="digit"></span><span id="percent-00000001" class="digit"></span><span id="percent-000000001" class="digit"></span><span id="percent-0000000001" class="digit"></span><span class="percent">%</percent>
+      <div id="renewables-part3">
+        <span id="renewables-0000001" class="digit"></span><span id="renewables-00000001" class="digit"></span><span id="renewables-000000001" class="digit"></span><span id="renewables-0000000001" class="digit"></span><span class="percent">%</span>
       </div>
     </div>
 
@@ -275,14 +275,15 @@ section {
 
     <div id="loss-damage-widget" class="widget space-after">
       <div id="loss-part1" class="double">
-        $<span id="loss-10000000000000" class="digit"></span><span id="loss-1000000000000" class="digit"></span>,
+        $<span id="loss-10" class="digit"></span><span id="loss-1" class="digit"></span>.
       </div>
       <div id="loss-part2">
-        <span id="loss-100000000000" class="digit"></span><span id="loss-10000000000" class="digit"></span><span id="loss-1000000000" class="digit"></span>,<span id="loss-100000000" class="digit"></span><span id="loss-10000000" class="digit"></span><span id="loss-1000000" class="digit"></span>,
+        <span id="loss-01" class="digit"></span><span id="loss-001" class="digit"></span><span id="loss-0001" class="digit"></span> <span id="loss-00001" class="digit"></span><span id="loss-000001" class="digit"></span><span id="loss-0000001" class="digit"></span>
       </div>
       <div id="loss-part3">
-        <span id="loss-100000" class="digit"></span><span id="loss-10000" class="digit"></span><span id="loss-1000" class="digit"></span>,<span id="loss-100" class="digit"></span><span id="loss-10" class="digit"></span><span id="loss-1" class="digit"></span>
+        <span id="loss-00000001" class="digit"></span><span id="loss-000000001" class="digit"></span><span id="loss-0000000001" class="digit"></span> <span id="loss-00000000001" class="digit"></span><span id="loss-000000000001" class="digit"></span><span id="loss-0000000000001" class="digit"></span>
       </div>
+      <div id="loss-part4">TRILLION</div>
     </div>
 
   </div>
@@ -305,37 +306,36 @@ var deadlineMinutes = [$('#minutes-1'), $('#minutes-10')];
 var deadlineSeconds = [$('#seconds-1'), $('#seconds-10')];
 
 var renewablesWidget = $('#renewables-widget');
-var renewablesPercentWholePart = [$('#percent-1'), $('#percent-10')];
-var renewablesPercentFractionalPart = [
-  $('#percent-0000000001'),
-  $('#percent-000000001'),
-  $('#percent-00000001'),
-  $('#percent-0000001'),
-  $('#percent-000001'),
-  $('#percent-00001'),
-  $('#percent-0001'),
-  $('#percent-001'),
-  $('#percent-01'),
+var renewablesWholePart = [$('#renewables-1'), $('#renewables-10')];
+var renewablesFractionalPart = [
+  $('#renewables-0000000001'),
+  $('#renewables-000000001'),
+  $('#renewables-00000001'),
+  $('#renewables-0000001'),
+  $('#renewables-000001'),
+  $('#renewables-00001'),
+  $('#renewables-0001'),
+  $('#renewables-001'),
+  $('#renewables-01'),
 ];
 
 var indigenousLandWidget = $('#indigenous-land-widget');
 
 var lossDamageWidget = $('#loss-damage-widget');
-var lossDamageDigits = [
-  $('#loss-1'),
-  $('#loss-10'),
-  $('#loss-100'),
-  $('#loss-1000'),
-  $('#loss-10000'),
-  $('#loss-100000'),
-  $('#loss-1000000'),
-  $('#loss-10000000'),
-  $('#loss-100000000'),
-  $('#loss-1000000000'),
-  $('#loss-10000000000'),
-  $('#loss-100000000000'),
-  $('#loss-1000000000000'),
-  $('#loss-10000000000000')
+var lossDamageWholePart = [$('#loss-1'), $('#loss-10')];
+var lossDamageFractionalPart = [
+  $('#loss-0000000000001'),
+  $('#loss-000000000001'),
+  $('#loss-00000000001'),
+  $('#loss-0000000001'),
+  $('#loss-000000001'),
+  $('#loss-00000001'),
+  $('#loss-0000001'),
+  $('#loss-000001'),
+  $('#loss-00001'),
+  $('#loss-0001'),
+  $('#loss-001'),
+  $('#loss-01'),
 ];
 
 function setDigits(value, elements) {
@@ -402,8 +402,8 @@ function renewables(row) {
   }
   var value = linearGrowth(RENEWABLES);
   var [whole, fractional] = value.split('.');
-  setDigits(whole - 0, renewablesPercentWholePart);
-  setDigits(fractional - 0, renewablesPercentFractionalPart);
+  setDigits(whole - 0, renewablesWholePart);
+  setDigits(fractional - 0, renewablesFractionalPart);
 }
 
 function indigenousLand(row) {
@@ -418,8 +418,8 @@ var LOSS_DAMAGE = {
   initial: 297540000000000000000000n,
   rate: 471408520521309n,
 
-  decimals: 0,
-  shift: 10
+  decimals: 12,
+  shift: 22
 };
 LOSS_DAMAGE.bias = 5n * 10n**BigInt(LOSS_DAMAGE.shift - LOSS_DAMAGE.decimals - 1);
 
@@ -429,7 +429,8 @@ function lossAndDamage(row) {
   }
   var value = linearGrowth(LOSS_DAMAGE);
   var [whole, fractional] = value.split('.');
-  setDigits(whole - 0, lossDamageDigits);
+  setDigits(whole - 0, lossDamageWholePart);
+  setDigits(fractional - 0, lossDamageFractionalPart);
 }
 
 function double(text) {
