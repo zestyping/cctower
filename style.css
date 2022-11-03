@@ -22,6 +22,9 @@ body {
   font-size: 90px;
   font-weight: 900;
 }
+.double .percent {
+  font-size: 150px;
+}
 #controls {
   position: absolute;
   right: 0;
@@ -53,6 +56,23 @@ section {
 .simulation #lower {
   left: 0px;
   top: 832px;
+}
+#status {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  top: 1080px;
+  height: 64px;
+  background: #000;
+  color: #0f0;
+  font-family: monospace;
+  font-weight: bold;
+  font-size: 32px;
+  padding: 12px;
+  border: 1px solid #333;
+  line-height: 1;
+  white-space: nowrap;
+  overflow: hidden;
 }
 .row {
   transition: opacity 250ms ease-out;
@@ -124,11 +144,9 @@ section {
 }
 .panel[theme='red-sm'] {
   background: #eb1c23;
-  font-size: 78px;
 }
 .panel[theme='blue-sm'] {
   background: #4aa1cc;
-  font-size: 78px;
 }
 .strike {
   text-decoration: line-through;
@@ -137,20 +155,25 @@ section {
   text-align: left;
   padding-left: 84px;
 }
-.double {
-  font-size: 200px;
-  line-height: 200px;
-  height: 176px;
+.small {  /* 7/8 size */
+  font-size: 78px;
+  line-height: 88px;
+  height: 88px;
 }
-.size-150 {
+.large {  /* 3/2 size */
   font-size: 148px;
   line-height: 144px;
   height: 132px;
 }
-.size-175 {
+.larger {  /* 7/4 size */
   font-size: 174px;
   line-height: 172px;
   height: 154px;
+}
+.double {  /* 2x size */
+  font-size: 200px;
+  line-height: 200px;
+  height: 176px;
 }
 .with-superscript {
   height: 88px;

@@ -46,6 +46,8 @@ var lossDamageFractionalPart = [
   $('#loss-01'),
 ];
 
+var hundredPercentWidget = $('#hundred-percent-widget');
+
 function setDigits(value, elements) {
   for (var element of elements) {
     element.text(value % 10);
@@ -130,7 +132,7 @@ var LOSS_DAMAGE = {
 };
 LOSS_DAMAGE.bias = 5n * 10n**BigInt(LOSS_DAMAGE.shift - LOSS_DAMAGE.decimals - 1);
 
-function lossAndDamage(row) {
+function lossDamage(row) {
   if (row.children().length == 0) {
     row.append(lossDamageWidget);
   }
@@ -140,10 +142,30 @@ function lossAndDamage(row) {
   setDigits(fractional - 0, lossDamageFractionalPart);
 }
 
-function size175(text) {
+function hundredPercent(row) {
+  if (row.children().length == 0) {
+    row.append(hundredPercentWidget);
+  }
+}
+
+function small(text) {
   return (row) => {
     row.text(text);
-    row.addClass('size-175');
+    row.addClass('small');
+  };
+}
+
+function large(text) {
+  return (row) => {
+    row.text(text);
+    row.addClass('large');
+  };
+}
+
+function larger(text) {
+  return (row) => {
+    row.text(text);
+    row.addClass('larger');
   };
 }
 

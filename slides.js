@@ -17,8 +17,8 @@ var slides = [
 
   {
     duration: 10,
-    left: {theme: 'red-sm', beats: ['#ClimateClock']},
-    right: {theme: 'blue-sm', beats: ['#ActInTime']},
+    left: {theme: 'red', beats: [small('#ClimateClock')]},
+    right: {theme: 'blue', beats: [small('#ActInTime')]},
     video: {upper: clockVideo},
   },
   {
@@ -30,7 +30,7 @@ var slides = [
     right: {theme: 'blue', beats: ['TO', 'PROTECT', 'OUR PLANET', '& PEOPLE']}
   },
   {
-    left: {theme: 'red', beats: [size175('DELAY'), size175('='), size175('DENIAL'), pause]},
+    left: {theme: 'red', beats: [larger('DELAY'), larger('='), larger('DENIAL'), pause]},
     right: {theme: 'blue', beats: ['WE MUST', 'END', 'FOSSIL', 'FUELS', 'BY', strike('2070'), pause, strike('2050'), pause, strike('2040'), pause, double('2030')]}
   },
   {
@@ -57,8 +57,8 @@ var slides = [
   },
   {
     duration: 10,
-    left: {theme: 'red-sm', beats: ['#ClimateClock']},
-    right: {theme: 'blue-sm', beats: ['#ActInTime']}
+    left: {theme: 'red', beats: [small('#ClimateClock')]},
+    right: {theme: 'blue', beats: [small('#ActInTime')]}
   }
 ];
 
@@ -66,16 +66,16 @@ var loop = [
   {
     duration: 20,
     left: {theme: 'blue', beats: [inverted('LIFELINE'), renewables, 'OF WORLD\'S', 'ENERGY', 'COMES FROM', 'RENEWABLES', pause]},
-    right: {theme: 'blue', beats: ['WE NEED', double('100%'), 'RENEWABLES', 'BEFORE', spaceAfter('2030'), 'TO STAY', 'BELOW', '1.5° C']}
+    right: {theme: 'blue', beats: ['WE NEED', hundredPercent, 'RENEWABLES', 'BEFORE', spaceAfter('2030'), 'TO STAY', 'BELOW', '1.5° C']}
   },
   {
     hold: 10,
     left: {theme: 'blue', beats: [inverted('LIFELINE'), indigenousLand, 'INDIGENOUS', 'LAND', 'MUST BE', 'PROTECTED', pause]},
-    right: {theme: 'blue', beats: ['INDIGENOUS', 'LANDS IN', 'INDIGENOUS', 'HANDS', 'IS A KEY', 'CLIMATE', 'SOLUTION', '', '#LandBack']}
+    right: {theme: 'blue', beats: ['INDIGENOUS', 'LANDS IN', 'INDIGENOUS', 'HANDS', 'IS A KEY', 'CLIMATE', spaceAfter('SOLUTION'), pause, '#LandBack']}
   },
   {
     duration: 20,
-    left: {theme: 'blue', beats: [inverted('LIFELINE'), lossAndDamage, 'LOSS &', 'DAMAGE', 'OWED', 'BY G20', pause]},
+    left: {theme: 'blue', beats: [inverted('LIFELINE'), lossDamage, 'LOSS &', 'DAMAGE', 'OWED', 'BY G20', pause]},
     right: {theme: 'blue', beats: ['THE BIGGEST', 'POLLUTERS', 'MUST PAY', 'THOSE', 'MOST', 'IMPACTED']}
   },
   {

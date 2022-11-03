@@ -13,6 +13,14 @@ var panels = {
   }
 };
 
+function formatBeats(beats) {
+  var parts = [];
+  for (var beat of beats) {
+    parts.push(typeof beat == 'string' ? beat : '<fn>');
+  }
+  return parts.join(',');
+}
+
 function tick() {
   var now = Date.now();
   var slide = slides[si];
@@ -37,7 +45,10 @@ function tick() {
       panels.right.rows[ri].removeClass().addClass('row');
     }
 
-    console.log('slide (' + duration/1000 + ' s):', slide.left.beats, slide.right.beats);
+    status = 'Slide ' + si + ' (' + duration/1000 + ' s): ';
+    console.log(status, slide.left.beats, slide.right.beats);
+    $('#status').text(status + '[' + formatBeats(slide.left.beats) + '] [' + formatBeats(slide.right.beats) + ']');
+
     if (slide.video) {
       $('#upper .video').empty();
       $('#lower .video').empty();
