@@ -27,15 +27,33 @@ body {
 }
 #controls {
   position: absolute;
-  right: 0;
+  top: 832px;
+  height: 208px;
   text-align: right;
   display: flex;
   flex-direction: column;
+  justify-content: end;
 }
-.spacer {
-  height: 12px;
+#controls section {
+  display: flex;
+  width: 416px;
+  margin-top: 12px;
 }
-section {
+button {
+  font-size: 24px;
+  flex-basis: 6em;
+  flex-grow: 1;
+  height: 48px;
+}
+button#bottom10 {
+  position: absolute;
+  left: 448px;
+  width: 40px;
+  top: 936px;
+  height: 104px;
+  text-align: right;
+}
+section.level {
   margin: 0;
   padding: 0;
   display: flex;
@@ -47,7 +65,7 @@ section {
   top: 0;
 }
 #lower {
-  left: 500;
+  left: 500px;
   top: 0;
 }
 .simulation #upper {
@@ -104,15 +122,17 @@ section {
   overflow: hidden;
   color: white;
 }
-.panel .shade {
+#lower .shade {
   position: absolute;
   top: 90%;
   bottom: 0;
   left: 0;
   right: 0;
-  background: #000;
-  opacity: 0.1;
+  background: #333;
+  border-top: 2px solid #000;
+  opacity: 0.3;
   pointer-events: none;
+  z-index: 3;
 }
 .video {
   position: absolute;
