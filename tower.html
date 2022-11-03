@@ -192,8 +192,8 @@ section {
   <div id="controls">
     <button onclick="document.fullscreenElement ? document.exitFullscreen() : document.body.requestFullscreen()" type=button>Full screen</button>
     <div class="spacer"></div>
-    <button onclick="fi = -1; nextFrameMillis = Date.now()" type=button>Restart</button>
-    <button onclick="fi = (fi + frames.length - 2) % frames.length; nextFrameMillis = Date.now()" type=button>Previous</button>
+    <button onclick="si = -1; nextFrameMillis = Date.now()" type=button>Restart</button>
+    <button onclick="si = (si + slides.length - 2) % slides.length; nextFrameMillis = Date.now()" type=button>Previous</button>
     <button onclick="nextFrameMillis = Date.now() + 3600*1000" type=button>Hold</button>
     <button onclick="nextFrameMillis = Date.now()" type=button>Next</button>
     <div class="spacer"></div>
@@ -473,185 +473,185 @@ function strike(text) {
   };
 }
 
-const frames = [
+const slides = [
   {
     duration: 60,
-    left: {theme: '', rows: []},
-    right: {theme: '', rows: []},
+    left: {theme: '', beats: []},
+    right: {theme: '', beats: []},
     video: {upper: lighthouseUpperVideo, lower: lighthouseLowerVideo}
   },
 
   {
     duration: 60,
-    left: {theme: '', rows: []},
-    right: {theme: '', rows: []},
+    left: {theme: '', beats: []},
+    right: {theme: '', beats: []},
     video: {upper: stripesUpperVideo, lower: stripesLowerVideo}
   },
 
   {
     duration: 10,
-    left: {theme: 'red-sm', rows: ['#ClimateClock']},
-    right: {theme: 'blue-sm', rows: ['#ActInTime']},
+    left: {theme: 'red-sm', beats: ['#ClimateClock']},
+    right: {theme: 'blue-sm', beats: ['#ActInTime']},
     video: {upper: clockVideo},
   },
   {
     duration: 10,
-    left: {theme: 'red', rows: ['THE', 'SCIENCE', 'IS', 'CLEAR']},
-    right: {theme: 'blue', rows: ['OUR', 'CARBON', 'BUDGET', 'IS', 'RUNNING', 'OUT']}
+    left: {theme: 'red', beats: ['THE', 'SCIENCE', 'IS', 'CLEAR']},
+    right: {theme: 'blue', beats: ['OUR', 'CARBON', 'BUDGET', 'IS', 'RUNNING', 'OUT']}
   },
   {
     duration: 10,
-    left: {theme: 'red', rows: ['WE', 'HAVE', 'LESS', 'THAN', '7', 'YEARS']},
-    right: {theme: 'blue', rows: ['TO', 'PROTECT', 'OUR PLANET', '& PEOPLE']}
+    left: {theme: 'red', beats: ['WE', 'HAVE', 'LESS', 'THAN', '7', 'YEARS']},
+    right: {theme: 'blue', beats: ['TO', 'PROTECT', 'OUR PLANET', '& PEOPLE']}
   },
   {
     duration: 10,
-    left: {theme: 'red', rows: ['DELAY', '=', 'DENIAL']},
-    right: {theme: 'blue', rows: ['WE MUST', 'END', 'FOSSIL', 'FUELS', 'BY', strike('2070'), pause, strike('2050'), pause, strike('2040'), pause, double('2030')]}
+    left: {theme: 'red', beats: ['DELAY', '=', 'DENIAL']},
+    right: {theme: 'blue', beats: ['WE MUST', 'END', 'FOSSIL', 'FUELS', 'BY', strike('2070'), pause, strike('2050'), pause, strike('2040'), pause, double('2030')]}
   },
   {
     duration: 10,
-    left: {theme: 'red', rows: [inverted('DEADLINE'), deadline]},
-    right: {theme: 'red', rows: ['OUR', 'WINDOW', 'OF', double('HOPE'), ' ', 'LET\'S', '#ActInTime']}
-  },
-
-  {
-    duration: 10,
-    left: {theme: 'red', rows: ['THE', 'EARTH', 'HAS A', 'DEADLINE']},
-    right: {theme: 'blue', rows: ['BUT', 'WE HAVE', 'MANY', 'LIFELINES']}
-  },
-  {
-    duration: 10,
-    left: {theme: 'red', rows: ['SOLUTIONS', 'EXIST']},
-    right: {theme: 'blue', rows: ['WE CAN', 'BUILD A', 'JUST &', 'LIVABLE', 'WORLD']}
-  },
-  {
-    duration: 10,
-    left: {theme: 'red', rows: ['LEADERS', 'PRESIDENTS', 'MINISTERS', 'DELEGATES', 'BE', double('BOLD!')]},
-    right: {theme: 'blue', rows: ['THE', 'FUTURE', 'IS', 'COUNTING', 'ON', double('YOU')]}
-  },
-  {
-    duration: 10,
-    left: {theme: 'red', rows: ['THE EYES', 'OF THE', 'WORLD', 'ARE ON', 'COP27']},
-    right: {theme: 'blue', rows: ['NO MORE', strike('BLAH'), strike('BLAH'), strike('BLAH'), ' ', 'TIME FOR', pause, inverted('COURAGE'), pause, inverted('JUSTICE'), pause, inverted('SPEED')]}
-  },
-  {
-    duration: 10,
-    left: {theme: 'red-sm', rows: ['#ClimateClock']},
-    right: {theme: 'blue-sm', rows: ['#ActInTime']}
-  },
-
-
-  {
-    duration: 10,
-    left: {theme: 'blue', rows: [inverted('LIFELINE'), renewables, 'OF WORLD\'S', 'ENERGY', 'COMES FROM', 'RENEWABLES']},
-    right: {theme: 'blue', rows: ['WE NEED', double('100%'), 'RENEWABLES', 'BEFORE', spaceAfter('2030'), 'TO STAY', 'BELOW', '1.5° C']}
-  },
-  {
-    duration: 10,
-    left: {theme: 'blue', rows: [inverted('LIFELINE'), indigenousLand, 'INDIGENOUS', 'LAND', 'MUST BE', 'PROTECTED']},
-    right: {theme: 'blue', rows: ['INDIGENOUS', 'LANDS IN', 'INDIGENOUS', 'HANDS', 'IS A KEY', 'CLIMATE', 'SOLUTION', ' ', '#LandBack']}
-  },
-  {
-    duration: 10,
-    left: {theme: 'blue', rows: [inverted('LIFELINE'), lossAndDamage, 'LOSS &', 'DAMAGE', 'OWED', 'BY G20']},
-    right: {theme: 'blue', rows: ['THE BIGGEST', 'POLLUTERS', 'MUST PAY', 'THOSE', 'MOST', 'IMPACTED']}
-  },
-  {
-    duration: 10,
-    left: {theme: 'red', rows: [inverted('DEADLINE'), deadline]},
-    right: {theme: 'red', rows: ['OUR', 'WINDOW', 'OF', double('HOPE'), ' ', 'LET\'S', '#ActInTime']}
+    left: {theme: 'red', beats: [inverted('DEADLINE'), deadline]},
+    right: {theme: 'red', beats: ['OUR', 'WINDOW', 'OF', double('HOPE'), '', 'LET\'S', '#ActInTime']}
   },
 
   {
     duration: 10,
-    left: {theme: 'blue', rows: ['LIFELINE', renewables, 'OF WORLD\'S', 'ENERGY', 'COMES FROM', 'RENEWABLES']},
-    right: {theme: 'blue', rows: ['WE MUST', 'ACHIEVE', '100%', 'RENEWABLES', 'BEFORE', '2030', 'TO STAY', 'BELOW', '1.5° C']}
+    left: {theme: 'red', beats: ['THE', 'EARTH', 'HAS A', 'DEADLINE']},
+    right: {theme: 'blue', beats: ['BUT', 'WE HAVE', 'MANY', 'LIFELINES']}
   },
   {
     duration: 10,
-    left: {theme: 'blue', rows: ['LIFELINE', indigenousLand, 'LAND', 'PROTECTED', 'BY', 'INDIGENOUS', 'PEOPLE']},
-    right: {theme: 'blue', rows: ['INDIGENOUS', 'LANDS IN', 'INDIGENOUS', 'HANDS', 'IS A KEY', 'CLIMATE', 'SOLUTION']}
+    left: {theme: 'red', beats: ['SOLUTIONS', 'EXIST']},
+    right: {theme: 'blue', beats: ['WE CAN', 'BUILD A', 'JUST &', 'LIVABLE', 'WORLD']}
   },
   {
     duration: 10,
-    left: {theme: 'blue', rows: ['LIFELINE', lossAndDamage, 'LOSS &', 'DAMAGE', 'OWED', 'BY G20']},
-    right: {theme: 'blue', rows: ['THE BIGGEST', 'POLLUTERS', 'MUST PAY', 'THOSE', 'MOST', 'IMPACTED']}
+    left: {theme: 'red', beats: ['LEADERS', 'PRESIDENTS', 'MINISTERS', 'DELEGATES', 'BE', double('BOLD!')]},
+    right: {theme: 'blue', beats: ['THE', 'FUTURE', 'IS', 'COUNTING', 'ON', double('YOU')]}
   },
   {
     duration: 10,
-    left: {theme: 'red', rows: ['DEADLINE', deadline]},
-    right: {theme: 'red', rows: ['OUR', 'WINDOW', 'OF', double('HOPE'), ' ', 'LET\'S', '#ActInTime']}
+    left: {theme: 'red', beats: ['THE EYES', 'OF THE', 'WORLD', 'ARE ON', 'COP27']},
+    right: {theme: 'blue', beats: ['NO MORE', strike('BLAH'), strike('BLAH'), strike('BLAH'), '', 'TIME FOR', pause, inverted('COURAGE'), pause, inverted('JUSTICE'), pause, inverted('SPEED')]}
+  },
+  {
+    duration: 10,
+    left: {theme: 'red-sm', beats: ['#ClimateClock']},
+    right: {theme: 'blue-sm', beats: ['#ActInTime']}
+  },
+
+
+  {
+    duration: 10,
+    left: {theme: 'blue', beats: [inverted('LIFELINE'), renewables, 'OF WORLD\'S', 'ENERGY', 'COMES FROM', 'RENEWABLES']},
+    right: {theme: 'blue', beats: ['WE NEED', double('100%'), 'RENEWABLES', 'BEFORE', spaceAfter('2030'), 'TO STAY', 'BELOW', '1.5° C']}
+  },
+  {
+    duration: 10,
+    left: {theme: 'blue', beats: [inverted('LIFELINE'), indigenousLand, 'INDIGENOUS', 'LAND', 'MUST BE', 'PROTECTED']},
+    right: {theme: 'blue', beats: ['INDIGENOUS', 'LANDS IN', 'INDIGENOUS', 'HANDS', 'IS A KEY', 'CLIMATE', 'SOLUTION', '', '#LandBack']}
+  },
+  {
+    duration: 10,
+    left: {theme: 'blue', beats: [inverted('LIFELINE'), lossAndDamage, 'LOSS &', 'DAMAGE', 'OWED', 'BY G20']},
+    right: {theme: 'blue', beats: ['THE BIGGEST', 'POLLUTERS', 'MUST PAY', 'THOSE', 'MOST', 'IMPACTED']}
+  },
+  {
+    duration: 10,
+    left: {theme: 'red', beats: [inverted('DEADLINE'), deadline]},
+    right: {theme: 'red', beats: ['OUR', 'WINDOW', 'OF', double('HOPE'), '', 'LET\'S', '#ActInTime']}
   },
 
   {
     duration: 10,
-    left: {theme: 'blue', rows: ['LIFELINE', renewables, 'OF WORLD\'S', 'ENERGY', 'COMES FROM', 'RENEWABLES']},
-    right: {theme: 'blue', rows: ['WE MUST', 'ACHIEVE', '100%', 'RENEWABLES', 'BEFORE', '2030', 'TO STAY', 'BELOW', '1.5° C']}
+    left: {theme: 'blue', beats: ['LIFELINE', renewables, 'OF WORLD\'S', 'ENERGY', 'COMES FROM', 'RENEWABLES']},
+    right: {theme: 'blue', beats: ['WE MUST', 'ACHIEVE', '100%', 'RENEWABLES', 'BEFORE', '2030', 'TO STAY', 'BELOW', '1.5° C']}
   },
   {
     duration: 10,
-    left: {theme: 'blue', rows: ['LIFELINE', indigenousLand, 'LAND', 'PROTECTED', 'BY', 'INDIGENOUS', 'PEOPLE']},
-    right: {theme: 'blue', rows: ['INDIGENOUS', 'LANDS IN', 'INDIGENOUS', 'HANDS', 'IS A KEY', 'CLIMATE', 'SOLUTION']}
+    left: {theme: 'blue', beats: ['LIFELINE', indigenousLand, 'LAND', 'PROTECTED', 'BY', 'INDIGENOUS', 'PEOPLE']},
+    right: {theme: 'blue', beats: ['INDIGENOUS', 'LANDS IN', 'INDIGENOUS', 'HANDS', 'IS A KEY', 'CLIMATE', 'SOLUTION']}
   },
   {
     duration: 10,
-    left: {theme: 'blue', rows: ['LIFELINE', lossAndDamage, 'LOSS &', 'DAMAGE', 'OWED', 'BY G20']},
-    right: {theme: 'blue', rows: ['THE BIGGEST', 'POLLUTERS', 'MUST PAY', 'THOSE', 'MOST', 'IMPACTED']}
+    left: {theme: 'blue', beats: ['LIFELINE', lossAndDamage, 'LOSS &', 'DAMAGE', 'OWED', 'BY G20']},
+    right: {theme: 'blue', beats: ['THE BIGGEST', 'POLLUTERS', 'MUST PAY', 'THOSE', 'MOST', 'IMPACTED']}
   },
   {
     duration: 10,
-    left: {theme: 'red', rows: ['DEADLINE', deadline]},
-    right: {theme: 'red', rows: ['OUR', 'WINDOW', 'OF', double('HOPE'), ' ', 'LET\'S', '#ActInTime']}
-  },
-
-  {
-    duration: 10,
-    left: {theme: 'blue', rows: ['LIFELINE', renewables, 'OF WORLD\'S', 'ENERGY', 'COMES FROM', 'RENEWABLES']},
-    right: {theme: 'blue', rows: ['WE MUST', 'ACHIEVE', '100%', 'RENEWABLES', 'BEFORE', '2030', 'TO STAY', 'BELOW', '1.5° C']}
-  },
-  {
-    duration: 10,
-    left: {theme: 'blue', rows: ['LIFELINE', indigenousLand, 'LAND', 'PROTECTED', 'BY', 'INDIGENOUS', 'PEOPLE']},
-    right: {theme: 'blue', rows: ['INDIGENOUS', 'LANDS IN', 'INDIGENOUS', 'HANDS', 'IS A KEY', 'CLIMATE', 'SOLUTION']}
-  },
-  {
-    duration: 10,
-    left: {theme: 'blue', rows: ['LIFELINE', lossAndDamage, 'LOSS &', 'DAMAGE', 'OWED', 'BY G20']},
-    right: {theme: 'blue', rows: ['THE BIGGEST', 'POLLUTERS', 'MUST PAY', 'THOSE', 'MOST', 'IMPACTED']}
-  },
-  {
-    duration: 10,
-    left: {theme: 'red', rows: ['DEADLINE', deadline]},
-    right: {theme: 'red', rows: ['OUR', 'WINDOW', 'OF', double('HOPE'), ' ', 'LET\'S', '#ActInTime']}
+    left: {theme: 'red', beats: ['DEADLINE', deadline]},
+    right: {theme: 'red', beats: ['OUR', 'WINDOW', 'OF', double('HOPE'), '', 'LET\'S', '#ActInTime']}
   },
 
   {
     duration: 10,
-    left: {theme: 'blue', rows: ['LIFELINE', renewables, 'OF WORLD\'S', 'ENERGY', 'COMES FROM', 'RENEWABLES']},
-    right: {theme: 'blue', rows: ['WE MUST', 'ACHIEVE', '100%', 'RENEWABLES', 'BEFORE', '2030', 'TO STAY', 'BELOW', '1.5° C']}
+    left: {theme: 'blue', beats: ['LIFELINE', renewables, 'OF WORLD\'S', 'ENERGY', 'COMES FROM', 'RENEWABLES']},
+    right: {theme: 'blue', beats: ['WE MUST', 'ACHIEVE', '100%', 'RENEWABLES', 'BEFORE', '2030', 'TO STAY', 'BELOW', '1.5° C']}
   },
   {
     duration: 10,
-    left: {theme: 'blue', rows: ['LIFELINE', indigenousLand, 'LAND', 'PROTECTED', 'BY', 'INDIGENOUS', 'PEOPLE']},
-    right: {theme: 'blue', rows: ['INDIGENOUS', 'LANDS IN', 'INDIGENOUS', 'HANDS', 'IS A KEY', 'CLIMATE', 'SOLUTION']}
+    left: {theme: 'blue', beats: ['LIFELINE', indigenousLand, 'LAND', 'PROTECTED', 'BY', 'INDIGENOUS', 'PEOPLE']},
+    right: {theme: 'blue', beats: ['INDIGENOUS', 'LANDS IN', 'INDIGENOUS', 'HANDS', 'IS A KEY', 'CLIMATE', 'SOLUTION']}
   },
   {
     duration: 10,
-    left: {theme: 'blue', rows: ['LIFELINE', lossAndDamage, 'LOSS &', 'DAMAGE', 'OWED', 'BY G20']},
-    right: {theme: 'blue', rows: ['THE BIGGEST', 'POLLUTERS', 'MUST PAY', 'THOSE', 'MOST', 'IMPACTED']}
+    left: {theme: 'blue', beats: ['LIFELINE', lossAndDamage, 'LOSS &', 'DAMAGE', 'OWED', 'BY G20']},
+    right: {theme: 'blue', beats: ['THE BIGGEST', 'POLLUTERS', 'MUST PAY', 'THOSE', 'MOST', 'IMPACTED']}
   },
   {
     duration: 10,
-    left: {theme: 'red', rows: ['DEADLINE', deadline]},
-    right: {theme: 'red', rows: ['OUR', 'WINDOW', 'OF', double('HOPE'), ' ', 'LET\'S', '#ActInTime']}
+    left: {theme: 'red', beats: ['DEADLINE', deadline]},
+    right: {theme: 'red', beats: ['OUR', 'WINDOW', 'OF', double('HOPE'), '', 'LET\'S', '#ActInTime']}
+  },
+
+  {
+    duration: 10,
+    left: {theme: 'blue', beats: ['LIFELINE', renewables, 'OF WORLD\'S', 'ENERGY', 'COMES FROM', 'RENEWABLES']},
+    right: {theme: 'blue', beats: ['WE MUST', 'ACHIEVE', '100%', 'RENEWABLES', 'BEFORE', '2030', 'TO STAY', 'BELOW', '1.5° C']}
+  },
+  {
+    duration: 10,
+    left: {theme: 'blue', beats: ['LIFELINE', indigenousLand, 'LAND', 'PROTECTED', 'BY', 'INDIGENOUS', 'PEOPLE']},
+    right: {theme: 'blue', beats: ['INDIGENOUS', 'LANDS IN', 'INDIGENOUS', 'HANDS', 'IS A KEY', 'CLIMATE', 'SOLUTION']}
+  },
+  {
+    duration: 10,
+    left: {theme: 'blue', beats: ['LIFELINE', lossAndDamage, 'LOSS &', 'DAMAGE', 'OWED', 'BY G20']},
+    right: {theme: 'blue', beats: ['THE BIGGEST', 'POLLUTERS', 'MUST PAY', 'THOSE', 'MOST', 'IMPACTED']}
+  },
+  {
+    duration: 10,
+    left: {theme: 'red', beats: ['DEADLINE', deadline]},
+    right: {theme: 'red', beats: ['OUR', 'WINDOW', 'OF', double('HOPE'), '', 'LET\'S', '#ActInTime']}
+  },
+
+  {
+    duration: 10,
+    left: {theme: 'blue', beats: ['LIFELINE', renewables, 'OF WORLD\'S', 'ENERGY', 'COMES FROM', 'RENEWABLES']},
+    right: {theme: 'blue', beats: ['WE MUST', 'ACHIEVE', '100%', 'RENEWABLES', 'BEFORE', '2030', 'TO STAY', 'BELOW', '1.5° C']}
+  },
+  {
+    duration: 10,
+    left: {theme: 'blue', beats: ['LIFELINE', indigenousLand, 'LAND', 'PROTECTED', 'BY', 'INDIGENOUS', 'PEOPLE']},
+    right: {theme: 'blue', beats: ['INDIGENOUS', 'LANDS IN', 'INDIGENOUS', 'HANDS', 'IS A KEY', 'CLIMATE', 'SOLUTION']}
+  },
+  {
+    duration: 10,
+    left: {theme: 'blue', beats: ['LIFELINE', lossAndDamage, 'LOSS &', 'DAMAGE', 'OWED', 'BY G20']},
+    right: {theme: 'blue', beats: ['THE BIGGEST', 'POLLUTERS', 'MUST PAY', 'THOSE', 'MOST', 'IMPACTED']}
+  },
+  {
+    duration: 10,
+    left: {theme: 'red', beats: ['DEADLINE', deadline]},
+    right: {theme: 'red', beats: ['OUR', 'WINDOW', 'OF', double('HOPE'), '', 'LET\'S', '#ActInTime']}
   },
 ];
 
-var fi = -1;
+var si = -1;
 var startFrameMillis = 0;
 var nextFrameMillis = 0;
-var si = 0;
+var bi = 0;
 var panels = {
   left: {
     node: $('#lower-left'),
@@ -665,48 +665,52 @@ var panels = {
 
 function tick() {
   var now = Date.now();
-  var frame = frames[fi];
+  var slide = slides[si];
   if (now > nextFrameMillis) {
-    fi = (fi + 1) % frames.length;
-    frame = frames[fi];
+    si = (si + 1) % slides.length;
+    slide = slides[si];
     startFrameMillis = (nextFrameMillis > now - 1000) ? nextFrameMillis : now;
-    nextFrameMillis = startFrameMillis + frame.duration * 1000;
+    nextFrameMillis = startFrameMillis + slide.duration * 1000;
+
+    panels.left.node.attr('theme', slide.left.theme);
+    panels.right.node.attr('theme', slide.right.theme);
     for (var ri = 0; ri < panels.left.rows.length; ri++) {
       panels.left.rows[ri].empty();
     }
     for (var ri = 0; ri < panels.right.rows.length; ri++) {
       panels.right.rows[ri].empty();
     }
-    console.log('frame:', frame.left.rows, frame.right.rows);
-    if (frame.video) {
+
+    console.log('slide:', slide.left.beats, slide.right.beats);
+    if (slide.video) {
       $('#upper .video').empty();
       $('#lower .video').empty();
-      if (frame.video.upper) {
-        $('#upper .video').append(frame.video.upper);
-        frame.video.upper.get(0).currentTime = 0;
-        frame.video.upper.get(0).play();
+      if (slide.video.upper) {
+        $('#upper .video').append(slide.video.upper);
+        slide.video.upper.get(0).currentTime = 0;
+        slide.video.upper.get(0).play();
       }
-      if (frame.video.lower) {
-        $('#lower .video').append(frame.video.lower);
-        frame.video.lower.get(0).currentTime = 0;
-        frame.video.lower.get(0).play();
+      if (slide.video.lower) {
+        $('#lower .video').append(slide.video.lower);
+        slide.video.lower.get(0).currentTime = 0;
+        slide.video.lower.get(0).play();
       }
     }
   }
-  si = 1;
-  drawPanel(panels.left, frame.left, now - startFrameMillis);
-  si += 2;
-  drawPanel(panels.right, frame.right, now - startFrameMillis);
+  bi = 1;
+  drawPanel(panels.left, slide.left.beats, now - startFrameMillis);
+  bi += 2;
+  drawPanel(panels.right, slide.right.beats, now - startFrameMillis);
   setTimeout(tick, 20);
 }
 
-function drawPanel(panel, frame, millis) {
-  while (panel.rows.length < frame.rows.length) {
+function drawPanel(panel, beats, millis) {
+  while (panel.rows.length < beats.length) {
     panel.rows.push($('<div>').addClass('row').appendTo(panel.node));
   }
   var revealed = millis / 500;
   for (var ri = 0; ri < panel.rows.length; ri++) {
-    var content = frame.rows[ri] || '';
+    var content = beats[ri] || '';
     if (typeof content == 'function') {
       content(panel.rows[ri]);
     } else {
@@ -714,10 +718,9 @@ function drawPanel(panel, frame, millis) {
       panel.rows[ri].removeClass().addClass('row');
       panel.rows[ri].text(content);
     }
-    panel.rows[ri].toggleClass('hidden', si >= revealed);
-    if (frame.rows[ri]) si++;
+    panel.rows[ri].toggleClass('hidden', bi >= revealed);
+    bi++;
   }
-  panel.node.attr('theme', frame.theme);
 }
 
 tick();
