@@ -34,6 +34,9 @@ body {
   display: flex;
   flex-direction: column;
 }
+.spacer {
+  height: 12px;
+}
 section {
   margin: 0;
   padding: 0;
@@ -90,13 +93,14 @@ section {
   overflow: hidden;
   color: white;
 }
-.panel .guideline {
+.panel .shade {
   position: absolute;
-  top: 0;
-  bottom: 10%;
+  top: 90%;
+  bottom: 0;
   left: 0;
   right: 0;
-  border-bottom: 1px solid black;
+  background: #000;
+  opacity: 0.1;
   pointer-events: none;
 }
 .video {
@@ -186,11 +190,14 @@ section {
 
 <body>
   <div id="controls">
-    <button onclick='document.fullscreenElement ? document.exitFullscreen() : document.body.requestFullscreen()' type=button>Full screen</button>
-    <button onclick='fi = -1; nextFrameMillis = Date.now()' type=button>Restart</button>
-    <button onclick='fi = (fi + frames.length - 2) % frames.length; nextFrameMillis = Date.now()' type=button>Previous</button>
-    <button onclick='nextFrameMillis = Date.now() + 3600*1000' type=button>Stay</button>
-    <button onclick='nextFrameMillis = Date.now()' type=button>Next</button>
+    <button onclick="document.fullscreenElement ? document.exitFullscreen() : document.body.requestFullscreen()" type=button>Full screen</button>
+    <div class="spacer"></div>
+    <button onclick="fi = -1; nextFrameMillis = Date.now()" type=button>Restart</button>
+    <button onclick="fi = (fi + frames.length - 2) % frames.length; nextFrameMillis = Date.now()" type=button>Previous</button>
+    <button onclick="nextFrameMillis = Date.now() + 3600*1000" type=button>Hold</button>
+    <button onclick="nextFrameMillis = Date.now()" type=button>Next</button>
+    <div class="spacer"></div>
+    <button onclick="$('.shade').toggleClass('omitted')" type=button>Bottom 10%</button>
   </div>
   <section id=upper>
     <div class="video">
@@ -205,10 +212,10 @@ section {
     <div class="video">
     </div>
     <div id="lower-left" class="panel lower left">
-      <div class="guideline"></div>
+      <div class="shade omitted"></div>
     </div>
     <div id="lower-right" class="panel lower right">
-      <div class="guideline"></div>
+      <div class="shade omitted"></div>
     </div>
   </section>
 
