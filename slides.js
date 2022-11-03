@@ -35,7 +35,7 @@ var slides = [
   },
   {
     duration: 20,
-    left: {theme: 'red', beats: [inverted('DEADLINE'), deadline, pause]},
+    left: {theme: 'red', beats: [inverse('DEADLINE'), deadline, pause]},
     right: {theme: 'red', beats: ['OUR', 'WINDOW', 'OF', double('HOPE'), 'TO STAY', 'BELOW', spaceAfter('1.5° C'), pause, 'LET\'S', '#ActInTime']}
   },
   {
@@ -53,7 +53,7 @@ var slides = [
   {
     hold: 10,
     left: {theme: 'red', beats: ['THE EYES', 'OF THE', 'WORLD', 'ARE ON', 'COP27', pause]},
-    right: {theme: 'blue', beats: ['NO MORE', strike('BLAH'), strike('BLAH'), strike('BLAH'), '', 'TIME FOR', pause, inverted('COURAGE'), pause, pause, inverted('JUSTICE'), pause, pause, inverted('SPEED')]}
+    right: {theme: 'blue', beats: ['NO MORE', strike('BLAH'), strike('BLAH'), strike('BLAH'), '', 'TIME FOR', pause, inverse('COURAGE'), pause, pause, inverse('JUSTICE'), pause, pause, inverse('SPEED')]}
   },
   {
     duration: 10,
@@ -65,22 +65,22 @@ var slides = [
 var loop = [
   {
     duration: 20,
-    left: {theme: 'blue', beats: [inverted('LIFELINE'), renewables, 'OF WORLD\'S', 'ENERGY', 'COMES FROM', 'RENEWABLES', pause]},
+    left: {theme: 'blue', beats: [inverse('LIFELINE'), renewables, 'OF WORLD\'S', 'ENERGY', 'COMES FROM', 'RENEWABLES', pause]},
     right: {theme: 'blue', beats: ['WE NEED', hundredPercent, 'RENEWABLES', 'BEFORE', spaceAfter('2030'), 'TO STAY', 'BELOW', '1.5° C']}
   },
   {
     hold: 10,
-    left: {theme: 'blue', beats: [inverted('LIFELINE'), indigenousLand, 'INDIGENOUS', 'LAND', 'MUST BE', 'PROTECTED', pause]},
+    left: {theme: 'blue', beats: [inverse('LIFELINE'), indigenousLand, 'INDIGENOUS', 'LAND', 'MUST BE', 'PROTECTED', pause]},
     right: {theme: 'blue', beats: ['INDIGENOUS', 'LANDS IN', 'INDIGENOUS', 'HANDS', 'IS A KEY', 'CLIMATE', spaceAfter('SOLUTION'), pause, '#LandBack']}
   },
   {
     duration: 20,
-    left: {theme: 'blue', beats: [inverted('LIFELINE'), lossDamage, 'LOSS &', 'DAMAGE', 'OWED', 'BY G20', pause]},
+    left: {theme: 'blue', beats: [inverse('LIFELINE'), lossDamage, 'LOSS &', 'DAMAGE', 'OWED', 'BY G20', pause]},
     right: {theme: 'blue', beats: ['THE BIGGEST', 'POLLUTERS', 'MUST PAY', 'THOSE', 'MOST', 'IMPACTED']}
   },
   {
     duration: 30,
-    left: {theme: 'red', beats: [inverted('DEADLINE'), deadline, pause]},
+    left: {theme: 'red', beats: [inverse('DEADLINE'), deadline, pause]},
     right: {theme: 'red', beats: ['THIS IS', 'OUR', 'WINDOW', 'OF', double('HOPE'), spaceAfter(' '), 'LET\'S', '#ActInTime']}
   }
 ];

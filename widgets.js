@@ -183,10 +183,10 @@ function spaceAfter(text) {
   };
 }
 
-function inverted(text) {
+function inverse(text) {
   return (row) => {
     row.text(text);
-    row.addClass('inverted');
+    row.addClass('inverse');
   };
 }
 

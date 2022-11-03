@@ -182,20 +182,20 @@ section {
 .space-after {
   padding-bottom: 48px;
 }
-[theme='red'] .inverted {
+[theme='red'] .inverse {
   transition: opacity 750ms;
   color: #eb1c23;
   background: #fff;
 }
-[theme='blue'] .inverted {
+[theme='blue'] .inverse {
   transition: opacity 750ms;
   color: #4aa1cc;
   background: #fff;
 }
-[theme='red'] .inverted.hidden {
+[theme='red'] .inverse.hidden {
   transition: none;
 }
-[theme='blue'] .inverted.hidden {
+[theme='blue'] .inverse.hidden {
   transition: none;
 }
 .struck {
