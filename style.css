@@ -12,7 +12,7 @@
 body {
   margin: 0;
   padding: 0;
-  background: #000;
+  background: #222;
   font-family: frontpage;
   font-size: 96px;
   line-height: 88px;
@@ -40,6 +40,7 @@ section {
   padding: 0;
   display: flex;
   position: absolute;
+  background: #000;
 }
 #upper {
   left: 0;
@@ -91,12 +92,7 @@ section {
 .panel {
   padding: 12px 0 0 0;
   text-align: center;
-}
-.panel.left {
-  background: #222;
-}
-.panel.right {
-  background: #333;
+  z-index: 2;
 }
 .panel.upper {
   width: 208px;
@@ -122,6 +118,7 @@ section {
   position: absolute;
   left: 0;
   top: 0;
+  z-index: 1;
 }
 #upper video {
   width: 416px;
