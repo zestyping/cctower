@@ -7,6 +7,10 @@
   font-family: frontpage;
   src: url('frontpageneue.otf') format('opentype');
 }
+@font-face {
+  font-family: helveticacondensed;
+  src: url('helveticacondensed.otf') format('opentype');
+}
 * {
   box-sizing: border-box;
 }
@@ -16,7 +20,12 @@ body {
   background: #000;
   font-family: frontpage;
   font-size: 96px;
-  line-height: 1;
+  line-height: 88px;
+}
+.percent {
+  font-family: helveticacondensed;
+  font-size: 90px;
+  font-weight: 900;
 }
 #controls {
   position: absolute;
@@ -81,6 +90,15 @@ section {
   overflow: hidden;
   color: white;
 }
+.panel .guideline {
+  position: absolute;
+  top: 0;
+  bottom: 10%;
+  left: 0;
+  right: 0;
+  border-bottom: 1px solid black;
+  pointer-events: none;
+}
 .video {
   position: absolute;
   left: 0;
@@ -116,9 +134,10 @@ section {
 .strike {
   text-decoration: line-through;
 }
-#num-years, #num-days, #percent-part1, #indigenous-part1, #loss-part1 {
-  font-size: 220px;
-  height: 192px;
+.double {
+  font-size: 200px;
+  line-height: 200px;
+  height: 176px;
 }
 #label-days {
   margin-bottom: 48px;
@@ -127,8 +146,8 @@ section {
   text-align: left;
   padding-left: 84px;
 }
-#indigenous-part3 {
-  height: 96px;
+.superscripted {
+  height: 88px;
   margin: -18px 0 66px 0;
 }
 #loss-part3 {
@@ -157,8 +176,10 @@ section {
     <div class="video">
     </div>
     <div id="lower-left" class="panel lower left">
+      <div class="guideline"></div>
     </div>
     <div id="lower-right" class="panel lower right">
+      <div class="guideline"></div>
     </div>
   </section>
 
@@ -182,9 +203,9 @@ section {
 
   <div id="widgets" class="omitted">
     <div id="deadline-widget" class="widget">
-      <div id="num-years"></div>
+      <div id="num-years" class="double"></div>
       <div id="label-years" class="lg">YEARS</div>
-      <div id="num-days">
+      <div id="num-days" class="double">
         <span id="days-100" class="digit"></span><span id="days-10" class="digit"></span><span id="days-1" class="digit"></span>
       </div>
       <div id="label-days" class="lg">DAYS</div>
@@ -200,25 +221,25 @@ section {
     </div>
 
     <div id="renewables-widget" class="widget">
-      <div id="percent-part1">
+      <div id="percent-part1" class="double">
         <span id="percent-10" class="digit"></span><span id="percent-1" class="digit"></span>.
       </div>
       <div id="percent-part2">
         <span id="percent-01" class="digit"></span><span id="percent-001" class="digit"></span><span id="percent-0001" class="digit"></span><span id="percent-00001" class="digit"></span><span id="percent-000001" class="digit"></span>
       </div>
       <div id="percent-part3">
-        <span id="percent-0000001" class="digit"></span><span id="percent-00000001" class="digit"></span><span id="percent-000000001" class="digit"></span><span id="percent-0000000001" class="digit"></span>%
+        <span id="percent-0000001" class="digit"></span><span id="percent-00000001" class="digit"></span><span id="percent-000000001" class="digit"></span><span id="percent-0000000001" class="digit"></span><span class="percent">%</percent>
       </div>
     </div>
 
     <div id="indigenous-land-widget" class="widget">
-      <div id="indigenous-part1">43.5</div>
+      <div id="indigenous-part1" class="double">43.5</div>
       <div id="indigenous-part2">MILLION</div>
-      <div id="indigenous-part3">KM<sup>2</sup></div>
+      <div id="indigenous-part3" class="superscripted">KM<sup>2</sup></div>
     </div>
 
     <div id="loss-damage-widget" class="widget">
-      <div id="loss-part1">
+      <div id="loss-part1" class="double">
         $<span id="loss-10000000000000" class="digit"></span><span id="loss-1000000000000" class="digit"></span>,
       </div>
       <div id="loss-part2">
