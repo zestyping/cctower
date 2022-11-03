@@ -134,24 +134,29 @@ section {
 .strike {
   text-decoration: line-through;
 }
+.time-part {
+  text-align: left;
+  padding-left: 84px;
+}
 .double {
   font-size: 200px;
   line-height: 200px;
   height: 176px;
 }
-#label-days {
-  margin-bottom: 48px;
-}
-.time-part {
-  text-align: left;
-  padding-left: 84px;
-}
-.superscripted {
+.with-superscript {
   height: 88px;
-  margin: -18px 0 66px 0;
+  margin: -27px 0 27px 0;
 }
-#loss-part3 {
-  margin-bottom: 48px;
+.space-after {
+  padding-bottom: 48px;
+}
+[theme='red'] .inverted {
+  color: #eb1c23;
+  background: #fff;
+}
+[theme='blue'] .inverted {
+  color: #4aa1cc;
+  background: #fff;
 }
 </style>
 
@@ -204,11 +209,11 @@ section {
   <div id="widgets" class="omitted">
     <div id="deadline-widget" class="widget">
       <div id="num-years" class="double"></div>
-      <div id="label-years" class="lg">YEARS</div>
+      <div id="label-years">YEARS</div>
       <div id="num-days" class="double">
         <span id="days-100" class="digit"></span><span id="days-10" class="digit"></span><span id="days-1" class="digit"></span>
       </div>
-      <div id="label-days" class="lg">DAYS</div>
+      <div id="label-days" class="space-after">DAYS</div>
       <div id="hours" class="time-part">
         <span id="hours-10" class="digit"></span><span id="hours-1" class="digit"></span> <span id="label-hours">HRS</span>
       </div>
@@ -220,7 +225,7 @@ section {
       </div>
     </div>
 
-    <div id="renewables-widget" class="widget">
+    <div id="renewables-widget" class="widget space-after">
       <div id="percent-part1" class="double">
         <span id="percent-10" class="digit"></span><span id="percent-1" class="digit"></span>.
       </div>
@@ -232,13 +237,12 @@ section {
       </div>
     </div>
 
-    <div id="indigenous-land-widget" class="widget">
+    <div id="indigenous-land-widget" class="widget space-after">
       <div id="indigenous-part1" class="double">43.5</div>
-      <div id="indigenous-part2">MILLION</div>
-      <div id="indigenous-part3" class="superscripted">KM<sup>2</sup></div>
+      <div id="indigenous-part2" class="with-superscript">MILLION KM<sup>2</sup></div>
     </div>
 
-    <div id="loss-damage-widget" class="widget">
+    <div id="loss-damage-widget" class="widget space-after">
       <div id="loss-part1" class="double">
         $<span id="loss-10000000000000" class="digit"></span><span id="loss-1000000000000" class="digit"></span>,
       </div>
@@ -388,7 +392,6 @@ var LOSS_DAMAGE = {
 };
 LOSS_DAMAGE.bias = 5n * 10n**BigInt(LOSS_DAMAGE.shift - LOSS_DAMAGE.decimals - 1);
 
-
 function lossAndDamage(row) {
   if (row.children().length == 0) {
     row.append(lossDamageWidget);
@@ -396,6 +399,27 @@ function lossAndDamage(row) {
   var value = linearGrowth(LOSS_DAMAGE);
   var [whole, fractional] = value.split('.');
   setDigits(whole - 0, lossDamageDigits);
+}
+
+function double(text) {
+  return (row) => {
+    row.text(text);
+    row.addClass('double');
+  };
+}
+
+function spaceAfter(text) {
+  return (row) => {
+    row.text(text);
+    row.addClass('space-after');
+  };
+}
+
+function inverted(text) {
+  return (row) => {
+    row.text(text);
+    row.addClass('inverted');
+  };
 }
 
 const frames = [
@@ -432,11 +456,11 @@ const frames = [
   {
     duration: 10,
     left: {theme: 'red', rows: ['DELAY', '=', 'DENIAL']},
-    right: {theme: 'blue', rows: ['WE MUST', 'END', 'FOSSIL', 'FUELS', 'BY', '/2070', '/2060', '/2050', '/2040', '2030']}
+    right: {theme: 'blue', rows: ['WE MUST', 'END', 'FOSSIL', 'FUELS', 'BY', '/2070', '/2050', '/2040', double('2030')]}
   },
   {
     duration: 10,
-    left: {theme: 'red', rows: ['DEADLINE', deadline]},
+    left: {theme: 'red', rows: [inverted('DEADLINE'), deadline]},
     right: {theme: 'red', rows: ['OUR', 'WINDOW', 'OF', 'HOPE', ' ', 'LET\'S', '#ActInTime']}
   },
 
@@ -452,8 +476,8 @@ const frames = [
   },
   {
     duration: 10,
-    left: {theme: 'red', rows: ['LEADERS', 'PRESIDENTS', 'MINISTERS', 'DELEGATES', 'BE BOLD!']},
-    right: {theme: 'blue', rows: ['THE', 'FUTURE', 'IS COUNTING', 'ON', 'YOU']}
+    left: {theme: 'red', rows: ['LEADERS', 'PRESIDENTS', 'MINISTERS', 'DELEGATES', 'BE', double('BOLD!')]},
+    right: {theme: 'blue', rows: ['THE', 'FUTURE', 'IS', 'COUNTING', 'ON', double('YOU')]}
   },
   {
     duration: 10,
@@ -469,22 +493,22 @@ const frames = [
 
   {
     duration: 10,
-    left: {theme: 'blue', rows: ['LIFELINE', renewables, 'OF WORLD\'S', 'ENERGY', 'COMES FROM', 'RENEWABLES']},
-    right: {theme: 'blue', rows: ['WE MUST', 'ACHIEVE', '100%', 'RENEWABLES', 'BEFORE', '2030', 'TO STAY', 'BELOW', '1.5° C']}
+    left: {theme: 'blue', rows: [inverted('LIFELINE'), renewables, 'OF WORLD\'S', 'ENERGY', 'COMES FROM', 'RENEWABLES']},
+    right: {theme: 'blue', rows: ['WE NEED', double('100%'), 'RENEWABLES', 'BEFORE', spaceAfter('2030'), 'TO STAY', 'BELOW', '1.5° C']}
   },
   {
     duration: 10,
-    left: {theme: 'blue', rows: ['LIFELINE', indigenousLand, 'INDIGENOUS', 'LAND', 'MUST BE', 'PROTECTED']},
+    left: {theme: 'blue', rows: [inverted('LIFELINE'), indigenousLand, 'INDIGENOUS', 'LAND', 'MUST BE', 'PROTECTED']},
     right: {theme: 'blue', rows: ['INDIGENOUS', 'LANDS IN', 'INDIGENOUS', 'HANDS', 'IS A KEY', 'CLIMATE', 'SOLUTION', ' ', '#LandBack']}
   },
   {
     duration: 10,
-    left: {theme: 'blue', rows: ['LIFELINE', lossAndDamage, 'LOSS &', 'DAMAGE', 'OWED', 'BY G20']},
+    left: {theme: 'blue', rows: [inverted('LIFELINE'), lossAndDamage, 'LOSS &', 'DAMAGE', 'OWED', 'BY G20']},
     right: {theme: 'blue', rows: ['THE BIGGEST', 'POLLUTERS', 'MUST PAY', 'THOSE', 'MOST', 'IMPACTED']}
   },
   {
     duration: 10,
-    left: {theme: 'red', rows: ['DEADLINE', deadline]},
+    left: {theme: 'red', rows: [inverted('DEADLINE'), deadline]},
     right: {theme: 'red', rows: ['THIS IS', 'OUR', 'WINDOW', 'OF HOPE', ' ', 'LET\'S', '#ActInTime']}
   },
 
@@ -641,6 +665,7 @@ function drawPanel(panel, frame, millis) {
         strike = true;
       }
       panel.rows[ri].empty();
+      panel.rows[ri].removeClass().addClass('row');
       panel.rows[ri].text(content);
       panel.rows[ri].toggleClass('strike', strike);
     }
