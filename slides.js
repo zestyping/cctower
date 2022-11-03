@@ -66,7 +66,7 @@ var loop = [
   {
     duration: 20,
     left: {theme: 'blue', beats: [inverse('LIFELINE'), renewables, 'OF WORLD\'S', 'ENERGY', 'COMES FROM', 'RENEWABLES', pause]},
-    right: {theme: 'blue', beats: ['WE NEED', hundredPercent, 'RENEWABLES', 'BEFORE', spaceAfter('2030'), 'TO STAY', 'BELOW', '1.5° C']}
+    right: {theme: 'blue', beats: ['WE NEED', hundredPercent, 'RENEWABLES', 'BEFORE', double('2030'), spaceAfter(''), 'TO STAY', 'BELOW', '1.5° C']}
   },
   {
     hold: 10,
