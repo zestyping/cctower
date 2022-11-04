@@ -17,8 +17,8 @@ var slides = [
 
   {
     duration: 10,
-    left: {theme: 'red', beats: [small('#ClimateClock')]},
-    right: {theme: 'blue', beats: [small('#ActInTime')]},
+    left: {theme: 'red', beats: [repeatHashtag('#ClimateClock')]},
+    right: {theme: 'blue', beats: [repeatHashtag('#ActInTime')]},
     video: {upper: clockVideo},
   },
   {
@@ -57,8 +57,8 @@ var slides = [
   },
   {
     duration: 10,
-    left: {theme: 'red', beats: [small('#ClimateClock')]},
-    right: {theme: 'blue', beats: [small('#ActInTime')]}
+    left: {theme: 'red', beats: [repeatHashtag('#ClimateClock')]},
+    right: {theme: 'blue', beats: [repeatHashtag('#ActInTime')]}
   }
 ];
 

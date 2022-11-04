@@ -186,13 +186,17 @@ function hundredPercent(row) {
 }
 hundredPercent.repr = '<hundredPercent>';
 
-function small(text) {
-  var smallText = (row) => {
-    row.text(text);
-    row.addClass('small');
+function repeatHashtag(text) {
+  var repeateHashtagText = (row) => {
+    if (row.children().length == 0) {
+      for (var i = 0; i < 12; i++) {
+        row.append($('<div>'));
+      }
+      row.children('div').addClass('repeated-hashtag').text(text);
+    }
   };
-  smallText.repr = text;
-  return smallText;
+  repeateHashtagText.repr = text;
+  return repeateHashtagText;
 }
 
 function large(text) {
