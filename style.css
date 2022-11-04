@@ -161,8 +161,9 @@ body.fullscreen #bottom15, body.fullscreen .shade {
 }
 .digit {
   display: inline-block;
-  width: 0.92ch;
   text-align: center;
+  width: 1ch;
+  margin: 0 -0.03ch;
 }
 .panel[theme='acred'] {
   background: #eb1c23;
