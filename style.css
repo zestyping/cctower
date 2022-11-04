@@ -153,17 +153,20 @@ section.level {
   width: 1ch;
   text-align: center;
 }
-.panel[theme='red'] {
+.panel[theme='acred'] {
   background: #eb1c23;
+}
+.panel[theme='acblue'] {
+  background: #4aa1cc;
+}
+.panel[theme='red'] {
+  background: #c52d38;
 }
 .panel[theme='blue'] {
-  background: #4aa1cc;
+  background: #5181a3;
 }
-.panel[theme='red-sm'] {
-  background: #eb1c23;
-}
-.panel[theme='blue-sm'] {
-  background: #4aa1cc;
+.panel[theme='lightblue'] {
+  background: #95bee6;
 }
 .strike {
   text-decoration: line-through;
@@ -194,21 +197,27 @@ section.level {
 .space-after {
   padding-bottom: 48px;
 }
-[theme='red'] .inverse {
+.inverse {
   transition: opacity 750ms;
-  color: #eb1c23;
   background: #fff;
+}
+.inverse.hidden {
+  transition: none;
+}
+[theme='acred'] .inverse {
+  color: #eb1c23;
+}
+[theme='acblue'] .inverse {
+  color: #4aa1cc;
+}
+[theme='red'] .inverse {
+  color: #c52d38;
 }
 [theme='blue'] .inverse {
-  transition: opacity 750ms;
-  color: #4aa1cc;
-  background: #fff;
+  color: #5181a3;
 }
-[theme='red'] .inverse.hidden {
-  transition: none;
-}
-[theme='blue'] .inverse.hidden {
-  transition: none;
+[theme='lightblue'] .inverse {
+  color: #95bee6;
 }
 .struck {
   display: inline-block;
@@ -221,6 +230,7 @@ section.level {
   top: 43%;
   bottom: 43%;
   background: #eb1c23;
+  background: #c52d38;
   transition: right 300ms ease-in 400ms;
 }
 .hidden .striker {

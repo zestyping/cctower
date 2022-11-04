@@ -36,7 +36,7 @@ var slides = [
   {
     duration: 20,
     left: {theme: 'red', beats: [inverse('DEADLINE'), deadline, pause]},
-    right: {theme: 'red', beats: ['OUR', 'WINDOW', 'OF', double('HOPE'), spaceAfter(''), pause, 'LET\'S', '#ActInTime', 'TO STAY', 'BELOW', '1.5° C']}
+    right: {theme: 'red', beats: ['THIS IS OUR', 'WINDOW OF', double('HOPE'), spaceAfter(''), pause, 'LET\'S', '#ActInTime', 'TO STAY', 'BELOW', '1.5° C']}
   },
   {
     left: {theme: 'red', beats: ['THE', 'EARTH', 'HAS A', 'DEADLINE']},
@@ -75,13 +75,13 @@ var loop = [
   },
   {
     duration: 20,
-    left: {theme: 'blue', beats: [inverse('LIFELINE'), lossDamage, 'LOSS &', 'DAMAGE', 'OWED', 'BY G20', pause]},
+    left: {theme: 'blue', beats: [inverse('LIFELINE'), loss8, 'LOSS &', 'DAMAGE', 'OWED', 'BY G20', pause]},
     right: {theme: 'blue', beats: ['THE BIGGEST', 'POLLUTERS', 'MUST PAY', 'THOSE', 'MOST', 'IMPACTED']}
   },
   {
     duration: 30,
     left: {theme: 'red', beats: [inverse('DEADLINE'), deadline, pause]},
-    right: {theme: 'red', beats: ['OUR', 'WINDOW', 'OF', double('HOPE'), spaceAfter(''), pause, 'LET\'S', '#ActInTime', 'TO STAY', 'BELOW', '1.5° C']}
+    right: {theme: 'red', beats: ['THIS IS OUR', 'WINDOW OF', double('HOPE'), spaceAfter(''), pause, 'LET\'S', '#ActInTime', 'TO STAY', 'BELOW', '1.5° C']}
   }
 ];
 

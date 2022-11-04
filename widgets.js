@@ -29,6 +29,19 @@ var renewablesFractionalPart = [
 
 var indigenousLandWidget = $('#indigenous-land-widget');
 
+var loss8Widget = $('#loss8-widget');
+var loss8WholePart = [$('#loss8-1'), $('#loss8-10')];
+var loss8FractionalPart = [
+  $('#loss8-000000001'),
+  $('#loss8-00000001'),
+  $('#loss8-0000001'),
+  $('#loss8-000001'),
+  $('#loss8-00001'),
+  $('#loss8-0001'),
+  $('#loss8-001'),
+  $('#loss8-01'),
+];
+
 var lossDamageWidget = $('#loss-damage-widget');
 var lossDamageWholePart = [$('#loss-1'), $('#loss-10')];
 var lossDamageFractionalPart = [
@@ -146,6 +159,18 @@ function lossDamage(row) {
   setDigits(fractional - 0, lossDamageFractionalPart);
 }
 lossDamage.repr = '<lossDamage>';
+
+function loss8(row) {
+  if (row.children().length == 0) {
+    row.append(loss8Widget);
+  }
+  var value = linearGrowth(LOSS_DAMAGE);
+  var [whole, fractional] = value.split('.');
+  fractional = fractional.substring(0, 8);
+  setDigits(whole - 0, loss8WholePart);
+  setDigits(fractional - 0, loss8FractionalPart);
+}
+loss8.repr = '<loss8>';
 
 function delayDenial(row) {
   if (row.children().length == 0) {
