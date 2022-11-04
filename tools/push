@@ -1,0 +1,6 @@
+#!/bin/bash
+
+git push origin main
+rm -f tower.zip
+zip tower.zip *
+rsync -avP . lfw:web/cop27/
