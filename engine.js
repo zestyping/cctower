@@ -16,8 +16,10 @@ var panels = {
 function toggleFullscreen() {
   if (document.fullscreenElement) {
     document.exitFullscreen();
+    $(document.body).removeClass('fullscreen');
   } else {
     document.body.requestFullscreen();
+    $(document.body).addClass('fullscreen');
   }
 }
 

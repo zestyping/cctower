@@ -67,14 +67,6 @@ section.level {
   left: 500px;
   top: 0;
 }
-.simulation #upper {
-  left: 208px;
-  top: 0;
-}
-.simulation #lower {
-  left: 0px;
-  top: 832px;
-}
 #status {
   position: absolute;
   left: 500px;
@@ -91,6 +83,27 @@ section.level {
   white-space: pre;
   overflow: hidden;
 }
+
+body.fullscreen #upper {
+  transform-origin: top left;
+  transform: scaleX(2);
+}
+body.fullscreen #lower {
+  left: 0;
+  top: 832px;
+}
+body.fullscreen #controls {
+  left: 850px;
+  top: 0;
+}
+body.fullscreen #status {
+  left: 850px;
+  top: 128px;
+}
+body.fullscreen #bottom15, body.fullscreen .shade {
+  display: none;
+}
+
 .row {
   transition: opacity 250ms ease-out;
   white-space: pre;
