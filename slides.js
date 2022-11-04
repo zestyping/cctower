@@ -27,7 +27,7 @@ var slides = [
   },
   {
     left: {theme: 'red', beats: ['WE', 'HAVE', 'LESS', 'THAN', '7', 'YEARS']},
-    right: {theme: 'blue', beats: ['TO', 'PROTECT', 'OUR PLANET', '& PEOPLE']}
+    right: {theme: 'blue', beats: ['TO', 'PROTECT', 'OUR', 'PLANET', '&', 'PEOPLE']}
   },
   {
     left: {theme: 'red', beats: [delayDenial, pause]},
@@ -43,7 +43,7 @@ var slides = [
     right: {theme: 'blue', beats: ['BUT', 'WE HAVE', 'MANY', 'LIFELINES']}
   },
   {
-    left: {theme: 'red', beats: ['SOLUTIONS', 'EXIST', pause]},
+    left: {theme: 'red', beats: ['SYSTEMIC', 'SOLUTIONS', 'ARE', double('STILL'), 'WITHIN', 'REACH', pause]},
     right: {theme: 'blue', beats: ['WE CAN', 'BUILD A', 'JUST &', 'LIVABLE', 'WORLD']}
   },
   {
