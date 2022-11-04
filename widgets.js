@@ -4,7 +4,14 @@ var stripesLowerVideo = $('video#stripes-lower');
 var lighthouseUpperVideo = $('video#lighthouse-upper');
 var lighthouseLowerVideo = $('video#lighthouse-lower');
 
+/* Hold references to widgets, as they can be removed from the DOM. */
 var deadlineWidget = $('#deadline-widget');
+var renewablesWidget = $('#renewables-widget');
+var indigenousLandWidget = $('#indigenous-land-widget');
+var lossDamageWidget = $('#loss-damage-widget');
+var loss8Widget = $('#loss8-widget');
+var delayDenialWidget = $('#delay-denial-widget');
+
 var deadlineNumYears = $('#num-years');
 var deadlineDays = [$('#days-1'), $('#days-10'), $('#days-100')];
 var deadlineLabelDays = $('#label-days');
@@ -13,7 +20,6 @@ var deadlineLabelHours = $('#label-hours');
 var deadlineMinutes = [$('#minutes-1'), $('#minutes-10')];
 var deadlineSeconds = [$('#seconds-1'), $('#seconds-10')];
 
-var renewablesWidget = $('#renewables-widget');
 var renewablesWholePart = [$('#renewables-1'), $('#renewables-10')];
 var renewablesFractionalPart = [
   $('#renewables-0000000001'),
@@ -27,9 +33,6 @@ var renewablesFractionalPart = [
   $('#renewables-01'),
 ];
 
-var indigenousLandWidget = $('#indigenous-land-widget');
-
-var loss8Widget = $('#loss8-widget');
 var loss8WholePart = [$('#loss8-1'), $('#loss8-10')];
 var loss8FractionalPart = [
   $('#loss8-000000001'),
@@ -42,7 +45,6 @@ var loss8FractionalPart = [
   $('#loss8-01'),
 ];
 
-var lossDamageWidget = $('#loss-damage-widget');
 var lossDamageWholePart = [$('#loss-1'), $('#loss-10')];
 var lossDamageFractionalPart = [
   $('#loss-0000000000001'),
@@ -58,9 +60,6 @@ var lossDamageFractionalPart = [
   $('#loss-001'),
   $('#loss-01'),
 ];
-
-var delayDenialWidget = $('#delay-denial-widget');
-var hundredPercentWidget = $('#hundred-percent-widget');
 
 function setDigits(value, elements) {
   for (var element of elements) {
@@ -179,17 +178,10 @@ function delayDenial(row) {
 }
 delayDenial.repr = '<delayDenial>';
 
-function hundredPercent(row) {
-  if (row.children().length == 0) {
-    row.append(hundredPercentWidget);
-  }
-}
-hundredPercent.repr = '<hundredPercent>';
-
 function repeatHashtag(text) {
   var repeateHashtagText = (row) => {
     if (row.children().length == 0) {
-      for (var i = 0; i < 12; i++) {
+      for (var i = 0; i < 11; i++) {
         row.append($('<div>'));
       }
       row.children('div').addClass('repeated-hashtag').text(text);
@@ -199,41 +191,21 @@ function repeatHashtag(text) {
   return repeateHashtagText;
 }
 
-function large(text) {
-  var largeText = (row) => {
-    row.text(text);
-    row.addClass('large');
+function classModifier(className) {
+  return (text) => {
+    var widget = (row) => {
+      row.text(text).addClass(className);
+    };
+    widget.repr = text;
+    return widget;
   };
-  largeText.repr = text;
-  return largeText;
 }
 
-function double(text) {
-  var doubleText = (row) => {
-    row.text(text);
-    row.addClass('double');
-  };
-  doubleText.repr = text;
-  return doubleText;
-}
-
-function spaceAfter(text) {
-  var spaceAfterText = (row) => {
-    row.text(text);
-    row.addClass('space-after');
-  };
-  spaceAfterText.repr = text;
-  return spaceAfterText;
-}
-
-function inverse(text) {
-  var inverseText = (row) => {
-    row.text(text);
-    row.addClass('inverse');
-  };
-  inverseText.repr = text;
-  return inverseText;
-}
+double = classModifier('double');
+doubleLower = classModifier('double-lower');
+doubleRaise = classModifier('double-raise');
+spaceAfter = classModifier('space-after');
+inverse = classModifier('inverse');
 
 function pause(row) {
   row.addClass('omitted');

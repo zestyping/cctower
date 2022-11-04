@@ -31,12 +31,12 @@ var slides = [
   },
   {
     left: {theme: 'red', beats: [delayDenial, pause]},
-    right: {theme: 'blue', beats: ['WE MUST', 'END', 'FOSSIL', 'FUELS', 'BY', strike('2070'), pause, strike('2050'), pause, strike('2040'), pause, double('2030')]}
+    right: {theme: 'blue', beats: ['WE MUST', 'END', 'FOSSIL', 'FUELS', 'BY', strike('2070'), pause, strike('2050'), pause, strike('2040'), pause, doubleRaise('2030')]}
   },
   {
     duration: 20,
     left: {theme: 'red', beats: [inverse('DEADLINE'), deadline, pause]},
-    right: {theme: 'red', beats: ['THIS IS OUR', 'WINDOW OF', double('HOPE'), spaceAfter(''), pause, 'LET\'S', '#ActInTime', 'TO STAY', 'BELOW', '1.5° C']}
+    right: {theme: 'red', beats: ['THIS IS OUR', 'WINDOW OF', doubleRaise('HOPE'), spaceAfter(''), pause, 'LET\'S', '#ActInTime', 'TO STAY', 'BELOW', '1.5° C']}
   },
   {
     left: {theme: 'red', beats: ['THE', 'EARTH', 'HAS A', 'DEADLINE']},
@@ -47,8 +47,8 @@ var slides = [
     right: {theme: 'blue', beats: ['WE CAN', 'BUILD A', 'JUST &', 'LIVABLE', 'WORLD']}
   },
   {
-    left: {theme: 'red', beats: ['LEADERS', 'PRESIDENTS', 'MINISTERS', 'DELEGATES', 'BE', double('BOLD!'), pause]},
-    right: {theme: 'blue', beats: ['THE', 'FUTURE', 'IS', 'COUNTING', 'ON', double('YOU')]}
+    left: {theme: 'red', beats: ['LEADERS', 'PRESIDENTS', 'MINISTERS', 'DELEGATES', 'BE', doubleRaise('BOLD!'), pause]},
+    right: {theme: 'blue', beats: ['THE', 'FUTURE', 'IS', 'COUNTING', 'ON', doubleRaise('YOU')]}
   },
   {
     hold: 10,
@@ -66,7 +66,7 @@ var loop = [
   {
     duration: 20,
     left: {theme: 'blue', beats: [inverse('LIFELINE'), renewables, 'OF WORLD\'S', 'ENERGY', 'COMES FROM', 'RENEWABLES', pause]},
-    right: {theme: 'blue', beats: ['WE NEED', hundredPercent, 'RENEWABLES', 'BEFORE', double('2030'), spaceAfter(''), 'TO STAY', 'BELOW', '1.5° C']}
+    right: {theme: 'blue', beats: ['WE NEED', doubleLower('100%'), 'RENEWABLES', 'BEFORE', doubleRaise('2030'), spaceAfter(''), 'TO STAY', 'BELOW', '1.5° C']}
   },
   {
     hold: 10,
@@ -81,7 +81,7 @@ var loop = [
   {
     duration: 30,
     left: {theme: 'red', beats: [inverse('DEADLINE'), deadline, pause]},
-    right: {theme: 'red', beats: ['THIS IS OUR', 'WINDOW OF', double('HOPE'), spaceAfter(''), pause, 'LET\'S', '#ActInTime', 'TO STAY', 'BELOW', '1.5° C']}
+    right: {theme: 'red', beats: ['THIS IS OUR', 'WINDOW OF', doubleRaise('HOPE'), spaceAfter(''), pause, 'LET\'S', '#ActInTime', 'TO STAY', 'BELOW', '1.5° C']}
   }
 ];
 

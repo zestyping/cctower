@@ -15,7 +15,7 @@
       <button onclick="nextSlide()" type=button>Next</button>
     </section>
   </div>
-  <button id="bottom10" onclick="$('.shade').toggleClass('omitted')" type=button>10<br>%</button>
+  <button id="bottom15" onclick="$('.shade').toggleClass('omitted')" type=button>15<br>%</button>
   <section class="level" id=upper>
     <div class="video">
     </div>
@@ -55,9 +55,9 @@
 
   <div id="widgets" class="omitted">
     <div id="deadline-widget" class="widget">
-      <div id="num-years" class="double"></div>
+      <div id="num-years" class="double-lower"></div>
       <div id="label-years">YEARS</div>
-      <div id="num-days" class="double">
+      <div id="num-days" class="double-lower">
         <span id="days-100" class="digit"></span><span id="days-10" class="digit"></span><span id="days-1" class="digit"></span>
       </div>
       <div id="label-days" class="space-after">DAYS</div>
@@ -73,24 +73,21 @@
     </div>
 
     <div id="renewables-widget" class="widget space-after">
-      <div id="renewables-part1" class="double">
+      <div id="renewables-part1" class="double-lower">
         <span id="renewables-10" class="digit"></span><span id="renewables-1" class="digit"></span>.
       </div>
       <div id="renewables-part2">
-        <span id="renewables-01" class="digit"></span><span id="renewables-001" class="digit"></span><span id="renewables-0001" class="digit"></span><span id="renewables-00001" class="digit"></span><span id="renewables-000001" class="digit"></span>
-      </div>
-      <div id="renewables-part3">
-        <span id="renewables-0000001" class="digit"></span><span id="renewables-00000001" class="digit"></span><span id="renewables-000000001" class="digit"></span><span id="renewables-0000000001" class="digit"></span><span class="percent">%</span>
+        <span id="renewables-01" class="digit"></span><span id="renewables-001" class="digit"></span><span id="renewables-0001" class="digit"></span><span id="renewables-00001" class="digit"></span><span id="renewables-000001" class="digit"></span><span id="renewables-0000001" class="digit"></span><span id="renewables-00000001" class="digit"></span><span id="renewables-000000001" class="digit"></span><span id="renewables-0000000001" class="digit"></span>%
       </div>
     </div>
 
     <div id="indigenous-land-widget" class="widget space-after">
-      <div id="indigenous-part1" class="double">43.5</div>
+      <div id="indigenous-part1" class="double-lower">43.5</div>
       <div id="indigenous-part2" class="with-superscript">MILLION KM<sup>2</sup></div>
     </div>
 
     <div id="loss-damage-widget" class="widget space-after">
-      <div id="loss-part1" class="double">
+      <div id="loss-part1" class="double-lower">
         $<span id="loss-10" class="digit"></span><span id="loss-1" class="digit"></span>.
       </div>
       <div id="loss-part2">
@@ -103,7 +100,7 @@
     </div>
 
     <div id="loss8-widget" class="widget space-after">
-      <div id="loss8-part1" class="double">
+      <div id="loss8-part1" class="double-lower">
         $<span id="loss8-10" class="digit"></span><span id="loss8-1" class="digit"></span>.
       </div>
       <div id="loss8-part2">
@@ -116,12 +113,6 @@
       <div class="row">DELAY</div>
       <div class="row">=</div>
       <div class="row">DENIAL</div>
-    </div>
-
-    <div id="hundred-percent-widget" class="widget">
-      <div id="hundred-percent" class="double">
-        100<span class="percent">%</span>
-      </div>
     </div>
   </div>
 
