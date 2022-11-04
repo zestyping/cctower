@@ -119,7 +119,7 @@ body.fullscreen #bottom15, body.fullscreen .shade {
   display: none;
 }
 .panel {
-  padding: 12px;
+  padding: 12px 0;
   text-align: center;
   z-index: 2;
 }
@@ -221,6 +221,7 @@ body.fullscreen #bottom15, body.fullscreen .shade {
   background: #fff;
   line-height: 70px;
   height: 64px;
+  margin: 0 12px;
 }
 .inverse.hidden {
   transition: none;
