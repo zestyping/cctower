@@ -145,17 +145,17 @@ body.fullscreen #bottom15, body.fullscreen .shade {
   pointer-events: none;
   z-index: 3;
 }
-.video {
+.media {
   position: absolute;
   left: 0;
   top: 0;
   z-index: 1;
 }
-#upper video {
+#upper video, #upper img {
   width: 416px;
   height: 832px;
 }
-#lower video {
+#lower video, #lower img {
   width: 832px;
   height: 832px;
 }

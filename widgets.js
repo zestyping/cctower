@@ -2,7 +2,7 @@ var clockVideo = $('video#clock');
 var stripesUpperVideo = $('video#stripes-upper');
 var stripesLowerVideo = $('video#stripes-lower');
 var lighthouseUpperVideo = $('video#lighthouse-upper');
-var lighthouseLowerVideo = $('video#lighthouse-lower');
+var lighthouseLowerImage = $('img#lighthouse-lower');
 
 /* Hold references to widgets, as they can be removed from the DOM. */
 var deadlineWidget = $('#deadline-widget');

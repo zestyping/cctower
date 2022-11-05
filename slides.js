@@ -2,24 +2,74 @@ const DEFAULT_HOLD = 5;
 
 var slides = [
   {
-    duration: 60,
+    hold: 1,
     left: {theme: '', beats: []},
-    right: {theme: '', beats: []},
-    video: {upper: lighthouseUpperVideo, lower: lighthouseLowerVideo}
+    right: {theme: '', beats: ['FOR', 'CENTURIES']},
+    media: {upper: lighthouseUpperVideo, lower: lighthouseLowerImage}
+  },
+  {
+    hold: 1,
+    left: {theme: '', beats: []},
+    right: {theme: '', beats: ['THE GREAT', 'LIGHTHOUSE', 'AT', 'ALEXANDRIA']},
+  },
+  {
+    hold: 1,
+    left: {theme: '', beats: []},
+    right: {theme: '', beats: ['LIT BY FIRE']},
+  },
+  {
+    hold: 3,
+    left: {theme: '', beats: []},
+    right: {theme: '', beats: ['GUIDED', 'SHIPS', 'THROUGH', 'STORMS', 'TO SAFE', 'HARBOR']},
+  },
+  {
+    hold: 3,
+    left: {theme: '', beats: []},
+    right: {theme: '', beats: ['TODAY,', 'WE FACE', 'THE', 'STORMS &', 'INJUSTICE', 'OF', 'CLIMATE', 'CHANGE']}
+  },
+  {
+    hold: 2,
+    left: {theme: '', beats: []},
+    right: {theme: '', beats: ['WE MUST', 'SHARPLY', 'CHANGE', 'COURSE']},
+  },
+  {
+    hold: 2,
+    left: {theme: '', beats: []},
+    right: {theme: '', beats: ['THE LIGHT', 'WE MUST', 'FOLLOW:']},
+  },
+  {
+    hold: 4,
+    left: {theme: '', beats: []},
+    right: {theme: '', beats: ['SCIENCE', 'JUSTICE', 'ECOLOGICAL', 'WISDOM', '& A', 'COMMITMENT', 'TO REAL', 'SYSTEMIC', 'SOLUTIONS']}
+  },
+  {
+    hold: 1,
+    left: {theme: '', beats: []},
+    right: {theme: '', beats: ['WE TOO', 'CAN', 'REACH', 'THE', 'SAFE', 'HARBOR']},
+  },
+  {
+    hold: 2,
+    left: {theme: '', beats: []},
+    right: {theme: '', beats: ['OF A', 'JUST AND', 'LIVABLE', 'WORLD']},
+  },
+  {
+    hold: 7,
+    left: {theme: '', beats: []},
+    right: {theme: '', beats: ['BUT', 'ONLY', 'IF', 'WE', '#ActInTime']},
   },
 
   {
     duration: 60,
     left: {theme: '', beats: []},
     right: {theme: '', beats: []},
-    video: {upper: stripesUpperVideo, lower: stripesLowerVideo}
+    media: {upper: stripesUpperVideo, lower: stripesLowerVideo}
   },
 
   {
     duration: 10,
     left: {theme: 'red', beats: [repeatHashtag('#ClimateClock')]},
     right: {theme: 'blue', beats: [repeatHashtag('#ActInTime')]},
-    video: {upper: clockVideo},
+    media: {upper: clockVideo},
   },
   {
     left: {theme: 'red', beats: ['THE', 'SCIENCE', 'IS', 'CLEAR', pause]},
